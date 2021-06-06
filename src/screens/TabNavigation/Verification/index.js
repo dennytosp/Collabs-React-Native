@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import COLORS from '../../../consts/color';
+import auth from '@react-native-firebase/auth';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,6 +41,14 @@ const styles = StyleSheet.create({
 });
 
 const Verification = ({navigation}) => {
+  const SignOut = () => {
+    auth()
+      .signOut()
+      .then(() => {
+        navigation.navigate('Login');
+        ToastAndroid.show('User signed out!', ToastAndroid.SHORT);
+      });
+  };
   return (
     <View style={styles.container}>
       <StatusBar
@@ -49,7 +58,7 @@ const Verification = ({navigation}) => {
       />
       <SafeAreaView style={styles.headerWrapper}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() => SignOut()}>
             <Icon name="chevron-left" size={24} style={styles.iconWhite} />
           </TouchableOpacity>
           <View style={{flex: 1, alignItems: 'center'}}>

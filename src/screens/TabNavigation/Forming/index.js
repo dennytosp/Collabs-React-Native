@@ -14,9 +14,9 @@ import Dropdown from '../../../components/Dropdown';
 import COLORS from '../../../consts/color';
 
 const Form = ({navigation}) => {
-  const [text, onChangeText] = useState('Useless Text');
-  const [number, onChangeNumber] = useState(null);
-
+  const [phonenumbers, setPhonenumbers] = useState();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
   return (
     <View style={styles.container}>
       <StatusBar
@@ -28,9 +28,7 @@ const Form = ({navigation}) => {
       <SafeAreaView style={styles.headerWrapper}>
         <View style={styles.header}>
           <View>
-            <TouchableOpacity
-            onPress = {() => navigation.goBack()}
-            >
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Icon name="chevron-left" size={24} style={styles.iconWhite} />
             </TouchableOpacity>
           </View>
@@ -57,25 +55,23 @@ const Form = ({navigation}) => {
             style={styles.input}
             placeholder="Your phone numbers"
             placeholderTextColor="#ababab"
-            onChangeNumber={onChangeNumber}
+            // onChangeText={text => setPhonenumbers(text)}
             keyboardType="numeric"
             // keyboardAppearance="light"
           />
           <TextInput
             style={styles.input}
             placeholder="Your full name"
-            onChangeText={onChangeText}
+            // onChangeText={text => setUsername(text)}
             placeholderTextColor="#ababab"
-            // keyboardType="numeric"
             keyboardAppearance="light"
           />
           <TextInput
             style={styles.input}
             placeholder="Your password"
-            onChangeText={onChangeText}
+            // onChangeText={text => setPassword(text)}
             placeholderTextColor="#ababab"
             secureTextEntry={true}
-            // keyboardType="numeric"
             keyboardAppearance="light"
           />
         </View>
@@ -95,7 +91,6 @@ const Form = ({navigation}) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {

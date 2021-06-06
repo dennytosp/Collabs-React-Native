@@ -5,13 +5,14 @@ import Verification from '../screens/TabNavigation/Verification';
 import Profile from '../screens/TabNavigation/Profile';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import auth from '@react-native-firebase/auth';
 
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Form"
+      initialRouteName="Verification"
       tabBarOptions={{
         activeTintColor: '#5566ee',
         style: {
