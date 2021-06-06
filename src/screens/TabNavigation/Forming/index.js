@@ -28,7 +28,9 @@ const Form = ({navigation}) => {
       <SafeAreaView style={styles.headerWrapper}>
         <View style={styles.header}>
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity
+            onPress = {() => navigation.goBack()}
+            >
               <Icon name="chevron-left" size={24} style={styles.iconWhite} />
             </TouchableOpacity>
           </View>
