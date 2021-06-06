@@ -1,6 +1,6 @@
 import React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
+import Form from '../screens/Forming';
 import Verification from '../screens/Verification';
 import Profile from '../screens/Profile';
 import { NavigationContainer } from '@react-navigation/native';
@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Verification"
+      initialRouteName="Form"
       tabBarOptions={{
         activeTintColor: '#5566ee',
         style: {
@@ -29,8 +29,8 @@ const MyTabs = () => {
         // showLabel: false,
       }}>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="Form"
+        component={Form}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (

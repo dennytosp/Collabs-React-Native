@@ -8,9 +8,9 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import Tanzania from '../assets/tanzania.svg';
-import Indonesia from '../assets/indonesia.svg';
-import Usa from '../assets/usa.svg';
+import Tanzania from '../assets/svg/tanzania.svg';
+import Indonesia from '../assets/svg/indonesia.svg';
+import Usa from '../assets/svg/usa.svg';
 import {Fragment} from 'react';
 
 const {width, height} = Dimensions.get('window');
