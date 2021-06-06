@@ -4,22 +4,22 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import FormScreen from './Forming';
-import VerificationScreen from './Verification';
-import ProfileScreen from './Profile';
+import FormScreen from './TabNavigation/Forming';
+import VerificationScreen from './TabNavigation/Verification';
+import ProfileScreen from './TabNavigation/Profile';
 import NavigationScreens from '../navigations';
 import DetailsScreen from './HomeRental/Details';
 import HomeScreen from './HomeRental/Home';
 import OnboardScreen from './HomeRental/Onboard';
-import LoginScreen from '../auth/Login';
-import RegisterScreen from '../auth/Register';
+import LoginScreen from './auth/Login';
+import RegisterScreen from './auth/Register';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Navigation" headerMode="none">
+      <Stack.Navigator initialRouteName="Register" headerMode="none">
         {/* Auth */}
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />

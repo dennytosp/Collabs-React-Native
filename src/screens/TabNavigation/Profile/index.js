@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import COLORS from '../../consts/color';
+import COLORS from '../../../consts/color';
 
 const styles = StyleSheet.create({
   container: {

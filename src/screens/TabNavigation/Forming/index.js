@@ -9,9 +9,9 @@ import {
   TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import Splash from '../../assets/svg/icon.svg';
-import Dropdown from '../../components/Dropdown';
-import COLORS from '../../consts/color';
+import Splash from '../../../assets/svg/icon.svg';
+import Dropdown from '../../../components/Dropdown';
+import COLORS from '../../../consts/color';
 
 const Form = ({navigation}) => {
   const [text, onChangeText] = useState('Useless Text');
