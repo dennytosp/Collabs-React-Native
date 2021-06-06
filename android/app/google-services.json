@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "146149352813",
+    "project_id": "collabs-58fd6",
+    "storage_bucket": "collabs-58fd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146149352813:android:f48c298634ff3173176664",
+        "android_client_info": {
+          "package_name": "com.collabs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146149352813-frs30pfom1nquado0uunqchneh551if9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.collabs",
+            "certificate_hash": "492653ede4c91d62b025c0937001baa7b0801763"
+          }
+        },
+        {
+          "client_id": "146149352813-gm1fc62sej1u76jf2fcnjqnod6pmjmgk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjuJpRLpRPFKNfYgfqv7feUjhDB30Gz2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146149352813-gm1fc62sej1u76jf2fcnjqnod6pmjmgk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
