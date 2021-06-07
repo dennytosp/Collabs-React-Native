@@ -17,6 +17,8 @@ import COLORS from '../../../consts/color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const {width} = Dimensions.get('screen');
 import data from '../../../consts/data';
+import styles from './styles';
+
 const HomeRetal = ({navigation}) => {
   const optionsList = [
     {title: 'Buy a Home', img: require('../../../assets/rental/house1.jpg')},
@@ -27,15 +29,15 @@ const HomeRetal = ({navigation}) => {
   const ListCategories = () => {
     const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
     return (
-      <View style={style.categoryListContainer}>
+      <View style={styles.categoryListContainer}>
         {categoryList.map((category, index) => (
           <Pressable
             key={index}
             onPress={() => setSelectedCategoryIndex(index)}>
             <Text
               style={[
-                style.categoryListText,
-                index == selectedCategoryIndex && style.activeCategoryListText,
+                styles.categoryListText,
+                index == selectedCategoryIndex && styles.activeCategoryListText,
               ]}>
               {category}
             </Text>
@@ -47,11 +49,11 @@ const HomeRetal = ({navigation}) => {
 
   const ListOptions = () => {
     return (
-      <View style={style.optionListsContainer}>
+      <View style={styles.optionListsContainer}>
         {optionsList.map((option, index) => (
-          <View style={style.optionsCard} key={index}>
+          <View style={styles.optionsCard} key={index}>
             {/* House image */}
-            <Image source={option.img} style={style.optionsCardImage} />
+            <Image source={option.img} style={styles.optionsCardImage} />
 
             {/* Option title */}
             <Text style={{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>
@@ -67,9 +69,9 @@ const HomeRetal = ({navigation}) => {
       <Pressable
         activeOpacity={0.8}
         onPress={() => navigation.navigate('Details', house)}>
-        <View style={style.card}>
+        <View style={styles.card}>
           {/* House image */}
-          <Image source={house.image} style={style.cardImage} />
+          <Image source={house.image} style={styles.cardImage} />
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
             <View
@@ -95,17 +97,17 @@ const HomeRetal = ({navigation}) => {
 
             {/* Facilities container */}
             <View style={{marginTop: 10, flexDirection: 'row'}}>
-              <View style={style.facility}>
+              <View style={styles.facility}>
                 <Icon name="hotel" size={18} />
-                <Text style={style.facilityText}>2</Text>
+                <Text style={styles.facilityText}>2</Text>
               </View>
-              <View style={style.facility}>
+              <View style={styles.facility}>
                 <Icon name="bathtub" size={18} />
-                <Text style={style.facilityText}>2</Text>
+                <Text style={styles.facilityText}>2</Text>
               </View>
-              <View style={style.facility}>
+              <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={style.facilityText}>100m</Text>
+                <Text style={styles.facilityText}>100m</Text>
               </View>
             </View>
           </View>
@@ -122,7 +124,7 @@ const HomeRetal = ({navigation}) => {
         barStyle="dark-content"
       />
       {/* Header container */}
-      <View style={style.header}>
+      <View style={styles.header}>
         <View>
           <Text style={{color: COLORS.grey}}>Location</Text>
           <Text style={{color: COLORS.dark, fontSize: 20, fontWeight: 'bold'}}>
@@ -131,7 +133,7 @@ const HomeRetal = ({navigation}) => {
         </View>
         <TouchableOpacity onPress={() => navigation.navigate('Verfile')}>
           <Image
-            style={style.profileImage}
+            style={styles.profileImage}
             source={require('../../../assets/deweei/person.jpg')}
           />
         </TouchableOpacity>
@@ -144,12 +146,12 @@ const HomeRetal = ({navigation}) => {
             justifyContent: 'space-between',
             paddingHorizontal: 20,
           }}>
-          <View style={style.searchInputContainer}>
+          <View style={styles.searchInputContainer}>
             <Icon name="search" color={COLORS.grey} size={25} />
             <TextInput placeholder="Search address, city, location" />
           </View>
 
-          <View style={style.sortBtn}>
+          <View style={styles.sortBtn}>
             <Icon name="tune" color={COLORS.white} size={25} />
           </View>
         </View>
@@ -174,89 +176,4 @@ const HomeRetal = ({navigation}) => {
   );
 };
 
-const style = StyleSheet.create({
-  header: {
-    paddingVertical: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-  },
-  profileImage: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-  },
-  searchInputContainer: {
-    height: 50,
-    backgroundColor: COLORS.light,
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    borderRadius: 12,
-  },
-  sortBtn: {
-    backgroundColor: COLORS.dark,
-    height: 50,
-    width: 50,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 10,
-  },
-  optionsCard: {
-    height: 210,
-    width: width / 2 - 30,
-    elevation: 15,
-    alignItems: 'center',
-    backgroundColor: COLORS.white,
-    borderRadius: 20,
-    paddingTop: 10,
-    paddingHorizontal: 10,
-  },
-  optionsCardImage: {
-    height: 140,
-    borderRadius: 10,
-    width: '100%',
-  },
-  optionListsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-    paddingHorizontal: 20,
-  },
-  categoryListText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    paddingBottom: 5,
-    color: COLORS.grey,
-  },
-  activeCategoryListText: {
-    color: COLORS.dark,
-    borderBottomWidth: 1,
-    paddingBottom: 5,
-  },
-  categoryListContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 40,
-    paddingHorizontal: 40,
-  },
-  card: {
-    height: 250,
-    backgroundColor: COLORS.white,
-    elevation: 10,
-    width: width - 40,
-    marginRight: 20,
-    padding: 15,
-    borderRadius: 20,
-  },
-  cardImage: {
-    width: '100%',
-    height: 120,
-    borderRadius: 15,
-  },
-  facility: {flexDirection: 'row', marginRight: 15},
-  facilityText: {marginLeft: 5, color: COLORS.grey},
-});
 export default HomeRetal;

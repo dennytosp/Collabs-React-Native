@@ -16,7 +16,7 @@ import styles from './styles';
 const Verfile = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.titleBar}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
