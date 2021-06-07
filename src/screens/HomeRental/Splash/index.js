@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from 'react-native'
 
 const Splash = () => {
     return (
-        <View>
-            <Text></Text>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
+            <Text style={{fontSize: 20}}>Splash</Text>
         </View>
     )
 }

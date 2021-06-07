@@ -11,6 +11,8 @@ import NavigationScreens from '../navigations';
 import DetailsScreen from './HomeRental/Details';
 import HomeScreen from './HomeRental/Home';
 import OnboardScreen from './HomeRental/Onboard';
+import SplashScreen from './HomeRental/Splash';
+import VerfileScreen from './HomeRental/Verfile';
 import LoginScreen from './auth/Login';
 import RegisterScreen from './auth/Register';
 
@@ -33,6 +35,10 @@ const App = () => {
         <Stack.Screen name="Onboard" component={OnboardScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
         <Stack.Screen name="HomeRetal" component={HomeScreen} />
+        
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Verfile" component={VerfileScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

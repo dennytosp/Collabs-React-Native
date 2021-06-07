@@ -11,6 +11,7 @@ import {
   Image,
   Pressable,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import COLORS from '../../../consts/color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -128,10 +129,12 @@ const HomeRetal = ({navigation}) => {
             Vietnam
           </Text>
         </View>
-        <Image
-          style={style.profileImage}
-          source={require('../../../assets/deweei/person.jpg')}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('Verfile')}>
+          <Image
+            style={style.profileImage}
+            source={require('../../../assets/deweei/person.jpg')}
+          />
+        </TouchableOpacity>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Input and sort button container */}
