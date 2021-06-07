@@ -17,6 +17,7 @@ import auth from '@react-native-firebase/auth';
 import styles from './styles/stylesLogin';
 
 const Login = ({navigation}) => {
+  
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   function validateEmail(email) {

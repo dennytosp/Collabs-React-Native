@@ -11,6 +11,8 @@ const COLORS = {
     deweei: '#d73418',
     bonus: '#b09afb',
 
+    disn: '##3490dc',
+
   };
   export default COLORS;
   
