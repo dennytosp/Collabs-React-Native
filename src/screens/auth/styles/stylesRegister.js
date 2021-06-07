@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   splash: {
-    paddingTop: 60,
-    paddingBottom: 160,
+    paddingTop: 55,
+    paddingBottom: 120,
     alignItems: 'center',
   },
   content: {
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   buttonWrapper: {
-    marginVertical: 30,
     alignItems: 'center',
+    marginVertical: 30,
   },
   button: {
     alignItems: 'center',

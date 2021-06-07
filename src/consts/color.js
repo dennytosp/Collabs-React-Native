@@ -6,8 +6,11 @@ const COLORS = {
     blue: '#5f82e6',
     red: 'red',
     tranparent: 'rgba(0,0,0,0)',
-    primary: '#5566ee',
+    primary: '#c4b1fd',
+    backup: '#5566ee',
+    deweei: '#d73418',
+    bonus: '#b09afb',
+
   };
-  
   export default COLORS;
   

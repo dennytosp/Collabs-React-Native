@@ -10,35 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import COLORS from '../../../consts/color';
 import auth from '@react-native-firebase/auth';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#fff',
-    marginTop: 20,
-  },
-  headerWrapper: {
-    borderBottomLeftRadius: 1,
-    borderBottomRightRadius: 1,
-    backgroundColor: COLORS.primary,
-    height: 75,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-    marginTop: 5,
-  },
-  headerText: {
-    fontWeight: 'bold',
-    color: '#fff',
-    fontSize: 20,
-  },
-  iconWhite: {
-    color: '#fff',
-  },
-});
+import styles from './stylesing';
 
 const Verification = ({navigation}) => {
   const SignOut = () => {
@@ -64,11 +36,7 @@ const Verification = ({navigation}) => {
           <View style={{flex: 1, alignItems: 'center'}}>
             <Text style={styles.headerText}>Verification Code</Text>
           </View>
-          <View
-          style={{width: 10,}}
-          >
-
-          </View>
+          <View style={{width: 10}}></View>
         </View>
       </SafeAreaView>
     </View>

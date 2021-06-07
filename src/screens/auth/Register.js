@@ -10,9 +10,11 @@ import {
   ToastAndroid,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import Splash from '../../assets/svg/paypal.svg';
 import COLORS from '../../consts/color';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+import styles from './styles/stylesRegister';
 
 const Register = ({navigation}) => {
   const [username, setUsername] = useState();
@@ -89,9 +91,9 @@ const Register = ({navigation}) => {
             }}
           />
         </View>
-        {/* <View style={styles.splash}>
-            
-        </View> */}
+        <View style={styles.splash}>
+          <Splash width={80} height={80} />
+        </View>
       </SafeAreaView>
       <View style={styles.content}>
         <View>
@@ -147,79 +149,4 @@ const Register = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#f7f7f7',
-    marginTop: 20,
-  },
-  headerWrapper: {
-    backgroundColor: COLORS.primary,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    height: 200,
-  },
-  header: {
-    padding: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 5,
-  },
-  iconWhite: {
-    color: '#FFF',
-  },
-  headerText: {
-    fontWeight: 'bold',
-    color: '#fff',
-    fontSize: 20,
-  },
-  splash: {
-    paddingTop: 60,
-    paddingBottom: 160,
-    alignItems: 'center',
-  },
-  content: {
-    marginHorizontal: 20,
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    paddingHorizontal: 20,
-    marginTop: -60,
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    color: '#2d2d2d',
-    paddingVertical: 20,
-  },
-  input: {
-    // fontWeight: 'bold',
-    borderBottomColor: '#dddddd',
-    borderBottomWidth: 2,
-    fontSize: 16,
-    marginBottom: 20,
-    paddingVertical: 20,
-  },
-  description: {
-    color: '#989898',
-    textAlign: 'center',
-    fontSize: 18,
-    padding: 20,
-    fontWeight: '400',
-  },
-  buttonWrapper: {
-    alignItems: 'center',
-    marginVertical: 30,
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#4355ee',
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-  },
-  iconButton: {
-    color: '#fff',
-  },
-});
 export default Register;

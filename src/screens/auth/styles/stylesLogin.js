@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   buttonWrapper: {
-    marginVertical: 30,
     alignItems: 'center',
+    marginVertical: 30,
   },
   button: {
     alignItems: 'center',
