@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import COLORS from '../../../consts/color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
 const {width} = Dimensions.get('screen');
 import data from '../../../consts/data';
 import styles from './styles';
@@ -72,6 +73,14 @@ const HomeRetal = ({navigation}) => {
         <View style={styles.card}>
           {/* House image */}
           <Image source={house.image} style={styles.cardImage} />
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Form')}
+            activeOpacity={0.8}
+            style={styles.editing}>
+            <Feather name="box" size={20} color={'#fafafa'} />
+          </TouchableOpacity>
+
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
             <View
@@ -172,6 +181,12 @@ const HomeRetal = ({navigation}) => {
           renderItem={({item}) => <Card house={item} />}
         />
       </ScrollView>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Form')}
+        activeOpacity={0.8}
+        style={styles.adding}>
+        <Feather name="twitter" size={26} color={'#fff'} />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

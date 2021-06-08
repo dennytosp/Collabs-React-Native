@@ -92,6 +92,31 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     color: COLORS.grey,
   },
+  adding: {
+    width: 60,
+    height: 60,
+    borderRadius: 60,
+    backgroundColor: '#595965',
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5
+  },
+  editing:{
+    width: 40,
+    height: 40,
+    borderRadius: 60,
+    backgroundColor: '#000',
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1
+
+  }
 });
 
 export default styles;

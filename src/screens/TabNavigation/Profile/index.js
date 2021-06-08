@@ -42,7 +42,7 @@ const Profile = ({navigation}) => {
           setAvatar(snapshot.val().avatar);
         }
       });
-  }, []);
+  }, [idToken]);
 
   const ImageLibary = () => {
     const options = {

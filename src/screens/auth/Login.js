@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -17,7 +17,9 @@ import auth from '@react-native-firebase/auth';
 import styles from './styles/stylesLogin';
 
 const Login = ({navigation}) => {
-  
+  // useEffect(() => {
+  // }, [navigation.refresh()]);
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   function validateEmail(email) {

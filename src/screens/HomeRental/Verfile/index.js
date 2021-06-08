@@ -16,7 +16,9 @@ import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 
 const Verfile = ({navigation, item}) => {
+  const [phonenumbers, setPhonenumbers] = useState();
   const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
   const [fullname, setFullname] = useState();
   const [avatar, setAvatar] = useState();
   const idToken = auth().currentUser.uid;
@@ -26,7 +28,9 @@ const Verfile = ({navigation, item}) => {
       .ref('User/' + idToken)
       .on('value', snapshot => {
         setAvatar(snapshot.val().avatar);
+        setPhonenumbers(snapshot.val().phonenumbers);
         setUsername(snapshot.val().username);
+        setEmail(snapshot.val().email);
         setFullname(snapshot.val().fullname);
       });
   };
@@ -41,7 +45,7 @@ const Verfile = ({navigation, item}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" translucent={true}/>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.titleBar}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -80,7 +84,8 @@ const Verfile = ({navigation, item}) => {
         </View>
         <View style={styles.iconContainer}>
           <Text style={[styles.text, {fontWeight: '200', fontSize: 30}]}>
-          {/* {jsUcfirst(username)} */} @{username}
+          {/* {jsUcfirst(username)} */} 
+          @{username}
           </Text>
           <Text style={[styles.text, {color: '#AEB5BC', fontSize: 14}]}>
             {fullname}
@@ -156,11 +161,7 @@ const Verfile = ({navigation, item}) => {
             <View style={{width: 250}}>
               <Text
                 style={[styles.text, {color: '#41444B', fontWeight: '300'}]}>
-                Rainy days {''}
-                <Text style={{fontWeight: '400'}}>
-                  by Deweei {''}
-                  <Text style={{fontWeight: '400'}}>Wzonist</Text>
-                </Text>
+               Email: {email}
               </Text>
             </View>
           </View>
@@ -170,8 +171,7 @@ const Verfile = ({navigation, item}) => {
             <View style={{width: 250}}>
               <Text
                 style={[styles.text, {color: '#41444B', fontWeight: '300'}]}>
-                Loving you {''}
-                <Text style={{fontWeight: '400'}}>by Dinh Phong</Text>
+                Phone: {phonenumbers}
               </Text>
             </View>
           </View>

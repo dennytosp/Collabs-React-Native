@@ -13,12 +13,15 @@ import auth from '@react-native-firebase/auth';
 import styles from './stylesing';
 
 const Verification = ({navigation}) => {
-  const SignOut = () => {
-    auth()
+  const SignOut = async () => {
+    await auth()
       .signOut()
       .then(() => {
         navigation.navigate('Login');
         ToastAndroid.show('User signed out!', ToastAndroid.SHORT);
+        auth().currentUser.reload();
+        // navigation.refresh();
+
       });
   };
   return (
