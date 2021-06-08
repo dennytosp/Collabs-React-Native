@@ -53,7 +53,11 @@ const Profile = ({navigation}) => {
       if (response) {
         // console.log('asset >>>>>>>>>>>>>>>>>>>>',response.assets[0].uri)
         setCheck(true);
-        setImageServices(response.assets[0].uri);
+        setImageServices(response.uri);
+        
+      }
+      if(response.didCancel){
+        setCheck(false);
       }
     });
   };
@@ -67,7 +71,7 @@ const Profile = ({navigation}) => {
           .ref('User/' + idToken)
           .update({
             uid: idToken,
-            avatar: '',
+            avatar: avatar,
             phonenumbers: phonenumbers,
             username: username,
             email: email,
@@ -96,8 +100,8 @@ const Profile = ({navigation}) => {
     const task = storage()
       .ref('UserAvatar/' + filename)
       .putFile(uploadUri);
-    setUploading(true);
-    setTransferred(0);
+    // setUploading(true);
+    // setTransferred(0);
     task.on('state_changed', taskSnapshot => {
       console.log(
         `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
@@ -119,6 +123,7 @@ const Profile = ({navigation}) => {
       .ref('UserAvatar/' + filename)
       .getDownloadURL();
     if (url != null) {
+      console.log('loggggggggggggggggggg=>>>>>>>>>>>>>>>>>>>>>>');
       database()
         .ref('User/' + idToken)
         .update({
