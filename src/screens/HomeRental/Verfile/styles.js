@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   dm: {
-    backgroundColor: '#41444B',
+    backgroundColor: '#485252',
     position: 'absolute',
     top: 20,
     width: 40,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   add: {
-    backgroundColor: '#41444B',
+    backgroundColor: '#485252',
     position: 'absolute',
     bottom: 0,
     right: 0,

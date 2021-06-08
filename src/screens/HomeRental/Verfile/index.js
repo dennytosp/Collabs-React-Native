@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -12,8 +12,33 @@ import {
 import COLORS from '../../../consts/color';
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './styles';
+import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
 
-const Verfile = ({navigation}) => {
+const Verfile = ({navigation, item}) => {
+  const [username, setUsername] = useState();
+  const [fullname, setFullname] = useState();
+  const [avatar, setAvatar] = useState();
+  const idToken = auth().currentUser.uid;
+
+  const profile = async () => {
+    database()
+      .ref('User/' + idToken)
+      .on('value', snapshot => {
+        setAvatar(snapshot.val().avatar);
+        setUsername(snapshot.val().username);
+        setFullname(snapshot.val().fullname);
+      });
+  };
+  useEffect(() => {
+    profile();
+  }),
+    [profile];
+
+  function jsUcfirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -30,7 +55,9 @@ const Verfile = ({navigation}) => {
         <View style={{alignSelf: 'center'}}>
           <View style={styles.profileImage}>
             <Image
-              source={require('../../../assets/deweei/person.jpg')}
+              source={{
+                uri: avatar,
+              }}
               style={styles.image}
               resizeMode="center"></Image>
           </View>
@@ -52,11 +79,11 @@ const Verfile = ({navigation}) => {
           </View>
         </View>
         <View style={styles.iconContainer}>
-          <Text style={[styles.text, {fontWeight: '200', fontSize: 36}]}>
-            Wzon
+          <Text style={[styles.text, {fontWeight: '200', fontSize: 30}]}>
+          {/* {jsUcfirst(username)} */} @{username}
           </Text>
           <Text style={[styles.text, {color: '#AEB5BC', fontSize: 14}]}>
-            Mobile Developer
+            {fullname}
           </Text>
         </View>
         <View style={styles.statusContainer}>
@@ -148,7 +175,6 @@ const Verfile = ({navigation}) => {
               </Text>
             </View>
           </View>
-          
         </View>
       </ScrollView>
     </SafeAreaView>
