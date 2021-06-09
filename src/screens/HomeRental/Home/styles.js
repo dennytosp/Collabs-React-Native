@@ -104,6 +104,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     elevation: 5,
   },
+  btnDelete: {
+    width: 30,
+    height: 30,
+    borderRadius: 60,
+    backgroundColor: '#000',
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1,
+
+  },
   btnEditing: {
     width: 40,
     height: 40,

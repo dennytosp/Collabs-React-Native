@@ -72,7 +72,7 @@ const Verfile = ({navigation, item}) => {
           </View>
           <View style={styles.active}></View>
           <View style={styles.add}>
-            <TouchableOpacity onPress={() => navigation.navigate('Navigation')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
               <Icon
                 name="edit-2"
                 size={32}

@@ -24,6 +24,8 @@ import data1 from '../../../consts/data';
 import styles from './styles';
 
 const HomeRetal = ({navigation}) => {
+  const [avatar, setAvatar] = useState();
+  const idToken = auth().currentUser.uid;
   const SignOut = async () => {
     await auth()
       .signOut()
@@ -35,13 +37,23 @@ const HomeRetal = ({navigation}) => {
       });
   };
 
+  const loadAvatar = async () => {
+    database()
+      .ref('User/' + idToken)
+      .on('value', snapshot => {
+        setAvatar(snapshot.val().avatar);
+      });
+  };
+  useEffect(() => {
+    loadAvatar();
+  });
 
   const [data, setData] = useState([]);
   const loadData = () => {
     database()
-    .ref('Product/')
-    .orderByChild('id')
-    .on('value', (snapshot) => {
+      .ref('Product/')
+      .orderByChild('id')
+      .on('value', snapshot => {
         if (snapshot.val() != null) {
           setData(Object.values(snapshot.val()));
         } else {
@@ -53,9 +65,19 @@ const HomeRetal = ({navigation}) => {
     loadData();
   }, []);
 
+  const delProd = async id => {
+    await database()
+      .ref('/Product/' + id)
+      .remove();
+    ToastAndroid.show('Delete successful', ToastAndroid.SHORT);
+  };
+
   const optionsList = [
-    {title: 'Buy a Home', img: require('../../../assets/rental/house1.jpg')},
-    {title: 'Rent a Home', img: require('../../../assets/rental/house2.jpg')},
+    {title: 'Take it home', img: require('../../../assets/shoes/shoes6.jpg')},
+    {
+      title: 'Take it everywhere',
+      img: require('../../../assets/shoes/shoes8.jpg'),
+    },
   ];
   const categoryList = ['Popular', 'Recommended', 'Nearest'];
 
@@ -85,7 +107,7 @@ const HomeRetal = ({navigation}) => {
       <View style={styles.optionListsContainer}>
         {optionsList.map((option, index) => (
           <View style={styles.optionsCard} key={index}>
-            {/* House image */}
+            {/* Shoes image */}
             <Image source={option.img} style={styles.optionsCardImage} />
 
             {/* Option title */}
@@ -101,10 +123,9 @@ const HomeRetal = ({navigation}) => {
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('Details', item)}
-        >
+        onPress={() => navigation.navigate('Details', item)}>
         <View style={styles.card}>
-          {/* House image */}
+          {/* Shoes image */}
           <Image
             source={{
               uri: item.imageProd,
@@ -113,18 +134,20 @@ const HomeRetal = ({navigation}) => {
           />
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('Editprod',{
-              nameProd: item.name,
-              priceProd: item.price,
-              descProd: item.description,
-              starProd: item.star,
-              ratingProd: item.rating,
-              imgProd: item.imageProd,
-              idProd: item.id
-            })}
+            onPress={() =>
+              navigation.navigate('Editprod', {
+                nameProd: item.name,
+                priceProd: item.price,
+                descProd: item.description,
+                starProd: item.star,
+                ratingProd: item.rating,
+                imgProd: item.imageProd,
+                idProd: item.id,
+              })
+            }
             activeOpacity={0.8}
             style={styles.btnEditing}>
-            <Feather name="box" size={20} color={'#fafafa'} />
+            <Feather name="edit-2" size={20} color={'#fafafa'} />
           </TouchableOpacity>
 
           <View style={{marginTop: 10}}>
@@ -153,8 +176,9 @@ const HomeRetal = ({navigation}) => {
             {/* Facilities container */}
             <View style={{marginTop: 10, flexDirection: 'row'}}>
               <View style={styles.facility}>
-                <Icon name="hotel" size={18} />
-                <Text style={styles.facilityText}>2</Text>
+                <TouchableOpacity style={{}} onPress={() => delProd(item.id)}>
+                  <Feather name="delete" size={16} color={'#000'} />
+                </TouchableOpacity>
               </View>
               <View style={styles.facility}>
                 <Icon name="bathtub" size={18} />
@@ -194,7 +218,7 @@ const HomeRetal = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('Verfile')}>
           <Image
             style={styles.profileImage}
-            source={require('../../../assets/deweei/person.jpg')}
+            source={{uri: avatar}}
           />
         </TouchableOpacity>
       </View>
@@ -208,7 +232,7 @@ const HomeRetal = ({navigation}) => {
           }}>
           <View style={styles.searchInputContainer}>
             <Icon name="search" color={COLORS.grey} size={25} />
-            <TextInput placeholder="Search address, city, location" />
+            <TextInput placeholder="Search name, description, price" />
           </View>
 
           <View style={styles.sortBtn}>
@@ -238,7 +262,7 @@ const HomeRetal = ({navigation}) => {
         onPress={() => navigation.navigate('Insertprod')}
         activeOpacity={0.8}
         style={styles.btnAdding}>
-        <Feather name="twitter" size={26} color={'#fff'} />
+        <Feather name="navigation" size={26} color={'#fff'} />
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => SignOut()}

@@ -10,6 +10,7 @@ import {
   Pressable,
   ToastAndroid,
   Image,
+  ProgressBarAndroid,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Splash from '../../../assets/svg/paypal.svg';
@@ -25,7 +26,6 @@ const EditProd = ({navigation, route}) => {
     route.params;
   const [width, setWidth] = useState();
   const [name, setName] = useState();
-  const [nameEdit, setNameEdit] = useState(nameProd);
   const [price, setPrice] = useState();
   const [description, setDescription] = useState();
   const [star, setStar] = useState();
@@ -38,31 +38,65 @@ const EditProd = ({navigation, route}) => {
   const [imageServices, setImageServices] = useState(null);
   const [check, setCheck] = useState(false);
   const idToken = auth().currentUser.uid;
+  
+  // change text update
+  const [nameEdit, setNameEdit] = useState(nameProd);
+  const [priceEdit, setPriceEdit] = useState(priceProd);
+  const [descEdit, setDescEdit] = useState(descProd);
+  const [starEdit, setStarEdit] = useState(starProd);
+  const [rateEdit, setRateEdit] = useState(ratingProd);
 
   const editProd = (id, name, price, description, star, rating) => {
     return new Promise(function (resolve, reject) {
-      if (imageProd != null) {
-        addProd(id, name, price, description, star, rating);
+      if (
+        nameEdit == null ||
+        priceEdit == null ||
+        descEdit == null ||
+        starEdit == null ||
+        rateEdit == null
+      ) {
+        ToastAndroid.show('Please do not leave it blank!', ToastAndroid.SHORT);
+      } else if (
+        nameEdit.charAt(0) == ' ' ||
+        priceEdit.charAt(0) == ' ' ||
+        descEdit.charAt(0) == ' ' ||
+        starEdit.charAt(0) == ' ' ||
+        rateEdit.charAt(0) == ' '
+      ) {
+        ToastAndroid.show('Can not start with blanks', ToastAndroid.SHORT);
+      } else if (nameEdit.length < 6) {
+        ToastAndroid.show('Product name is too short!', ToastAndroid.SHORT);
+      } else if (priceEdit.length < 3) {
+        ToastAndroid.show(
+          'Product price must be more than 100!',
+          ToastAndroid.SHORT,
+        );
+      } else if (descEdit.length < 6) {
+        ToastAndroid.show('Description too short!', ToastAndroid.SHORT);
       } else {
-        database()
-          .ref('Product/' + id)
-          .update({
-            name: name,
-            imageProd: '',
-            price: price,
-            uid: idToken,
-            description: description,
-            star: star,
-            rating: rating,
-          })
-          .then(snapshot => {
-            resolve(snapshot);
-            ToastAndroid.show('Edit product successful', ToastAndroid.SHORT);
-            navigation.navigate('HomeRental');
-          })
-          .catch(err => {
-            reject(err);
-          });
+        if (imageProd != null) {
+          addProd(id, name, price, description, star, rating);
+        } else {
+          database()
+            .ref('Product/' + id)
+            .update({
+              name: name,
+              imageProd: '',
+              price: price,
+              uid: idToken,
+              description: description,
+              star: star,
+              rating: rating,
+            })
+            .then(snapshot => {
+              resolve(snapshot);
+              ToastAndroid.show('Edit product successful', ToastAndroid.SHORT);
+              navigation.navigate('HomeRental');
+            })
+            .catch(err => {
+              reject(err);
+            });
+        }
       }
     });
   };
@@ -153,7 +187,7 @@ const EditProd = ({navigation, route}) => {
         setCheck(true);
         setImageProd(response.uri);
       }
-      if(response.didCancel){
+      if (response.didCancel) {
         setCheck(false);
       }
     });
@@ -208,7 +242,7 @@ const EditProd = ({navigation, route}) => {
         <View>
           <TextInput
             style={styles.input}
-            placeholder="Your name product"
+            placeholder="Enter product name"
             placeholderTextColor="#ababab"
             value={nameEdit}
             onChangeText={text => setNameEdit(text)}
@@ -216,37 +250,37 @@ const EditProd = ({navigation, route}) => {
           />
           <TextInput
             style={styles.input}
-            placeholder="Your price product"
-            value={priceProd}
-            onChangeText={text => setPrice(text)}
+            placeholder="Enter product price"
+            value={priceEdit}
+            onChangeText={text => setPriceEdit(text)}
             placeholderTextColor="#ababab"
             keyboardType="numeric"
             keyboardAppearance="light"
           />
           <TextInput
             style={styles.input}
-            placeholder="Your description"
-            value={descProd}
-            onChangeText={text => setDescription(text)}
+            placeholder="Enter product description"
+            value={descEdit}
+            onChangeText={text => setDescEdit(text)}
             placeholderTextColor="#ababab"
             keyboardAppearance="light"
           />
           <TextInput
             style={styles.input}
-            placeholder="Your star"
+            placeholder="Enter the number of stars of the product"
             placeholderTextColor="#ababab"
-            value={starProd}
+            value={starEdit}
             keyboardType="numeric"
-            onChangeText={text => setStar(text)}
+            onChangeText={text => setStarEdit(text)}
             keyboardAppearance="light"
           />
           <TextInput
             style={styles.input}
-            value={ratingProd}
-            placeholder="Your rating"
+            value={rateEdit}
+            placeholder="Enter product reviews"
             placeholderTextColor="#ababab"
             keyboardType="numeric"
-            onChangeText={text => setRating(text)}
+            onChangeText={text => setRateEdit(text)}
             keyboardAppearance="light"
           />
         </View>

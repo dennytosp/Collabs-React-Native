@@ -45,30 +45,57 @@ const Inserprod = ({navigation}) => {
         key = database().ref().push().key;
       }
 
-      if (imageProd != null) {
-        addImage(key, name, price, description, star, rating);
+      if (
+        name == null ||
+        price == null ||
+        description == null ||
+        star == null ||
+        rating == null
+      ) {
+        ToastAndroid.show('Please do not leave it blank!', ToastAndroid.SHORT);
+      } else if (
+        name.charAt(0) == ' ' ||
+        price.charAt(0) == ' ' ||
+        description.charAt(0) == ' ' ||
+        star.charAt(0) == ' ' ||
+        rating.charAt(0) == ' '
+      ) {
+        ToastAndroid.show('Can not start with blanks', ToastAndroid.SHORT);
+      } else if (name.length < 6) {
+        ToastAndroid.show('Product name is too short!', ToastAndroid.SHORT);
+      } else if (price.length < 3) {
+        ToastAndroid.show(
+          'Product price must be more than 100!',
+          ToastAndroid.SHORT,
+        );
+      } else if (description.length < 6) {
+        ToastAndroid.show('Description too short!', ToastAndroid.SHORT);
       } else {
-        database()
-          .ref('Product/' + key)
-          .update({
-            id: key,
-            name: name,
-            imageProd: '',
-            price: price,
-            uid: idToken,
-            
-            description: description,
-            star: star,
-            rating: rating,
-          })
-          .then(snapshot => {
-            resolve(snapshot);
-            ToastAndroid.show('Insert successful!', ToastAndroid.SHORT);
-            navigation.navigate('HomeRental');
-          })
-          .catch(err => {
-            reject(err);
-          });
+        if (imageProd != null) {
+          addImage(key, name, price, description, star, rating);
+        } else {
+          database()
+            .ref('Product/' + key)
+            .update({
+              id: key,
+              name: name,
+              imageProd: '',
+              price: price,
+              uid: idToken,
+
+              description: description,
+              star: star,
+              rating: rating,
+            })
+            .then(snapshot => {
+              resolve(snapshot);
+              ToastAndroid.show('Insert successful!', ToastAndroid.SHORT);
+              navigation.navigate('HomeRental');
+            })
+            .catch(err => {
+              reject(err);
+            });
+        }
       }
     });
   };
@@ -220,14 +247,14 @@ const Inserprod = ({navigation}) => {
         <View>
           <TextInput
             style={styles.input}
-            placeholder="Your name product"
+            placeholder="Enter product name"
             placeholderTextColor="#ababab"
             onChangeText={text => setName(text)}
             keyboardAppearance="light"
           />
           <TextInput
             style={styles.input}
-            placeholder="Your price product"
+            placeholder="Enter product price"
             onChangeText={text => setPrice(text)}
             placeholderTextColor="#ababab"
             keyboardType="numeric"
@@ -235,14 +262,14 @@ const Inserprod = ({navigation}) => {
           />
           <TextInput
             style={styles.input}
-            placeholder="Your description"
+            placeholder="Enter product description"
             onChangeText={text => setDescription(text)}
             placeholderTextColor="#ababab"
             keyboardAppearance="light"
           />
           <TextInput
             style={styles.input}
-            placeholder="Your star"
+            placeholder="Enter the number of stars of the product"
             placeholderTextColor="#ababab"
             keyboardType="numeric"
             onChangeText={text => setStar(text)}
@@ -250,7 +277,7 @@ const Inserprod = ({navigation}) => {
           />
           <TextInput
             style={styles.input}
-            placeholder="Your rating"
+            placeholder="Enter product reviews"
             placeholderTextColor="#ababab"
             keyboardType="numeric"
             onChangeText={text => setRating(text)}
