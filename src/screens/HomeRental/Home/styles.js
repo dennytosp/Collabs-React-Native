@@ -92,19 +92,19 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     color: COLORS.grey,
   },
-  adding: {
+  btnAdding: {
     width: 60,
     height: 60,
     borderRadius: 60,
-    backgroundColor: '#595965',
+    backgroundColor: '#DAAA23',
     position: 'absolute',
     bottom: 20,
     right: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 5
+    elevation: 5,
   },
-  editing:{
+  btnEditing: {
     width: 40,
     height: 40,
     borderRadius: 60,
@@ -114,9 +114,21 @@ const styles = StyleSheet.create({
     right: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 1
+    elevation: 1,
+  },
+  btnLogout: {
+    width: 30,
+    height: 30,
+    borderRadius: 60,
+    backgroundColor: '#C69178',
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2,
 
-  }
+  },
 });
 
 export default styles;

@@ -4,7 +4,6 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import FormScreen from './TabNavigation/Forming';
 import VerificationScreen from './TabNavigation/Verification';
 import ProfileScreen from './TabNavigation/Profile';
 import NavigationScreens from '../navigations';
@@ -15,6 +14,8 @@ import SplashScreen from './HomeRental/Splash';
 import VerfileScreen from './HomeRental/Verfile';
 import LoginScreen from './auth/Login';
 import RegisterScreen from './auth/Register';
+import InsertProdScreen from './TabNavigation/Insertprod';
+import EditProdScreen from './TabNavigation/Editprod';
 
 const Stack = createStackNavigator();
 
@@ -28,13 +29,15 @@ const App = () => {
 
         {/* Navigation */}
         <Stack.Screen name="Navigation" component={NavigationScreens} />
-        <Stack.Screen name="Form" component={FormScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Verification" component={VerificationScreen} />
+        <Stack.Screen name="Insertprod" component={InsertProdScreen} />
+        <Stack.Screen name="Editprod" component={EditProdScreen} />
+
         {/* Rental */}
         <Stack.Screen name="Onboard" component={OnboardScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
-        <Stack.Screen name="HomeRetal" component={HomeScreen} />
+        <Stack.Screen name="HomeRental" component={HomeScreen} />
         
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Verfile" component={VerfileScreen} />

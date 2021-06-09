@@ -1,6 +1,6 @@
 import React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Form from '../screens/TabNavigation/Forming';
+import Insertprod from '../screens/TabNavigation/Insertprod';
 import Verification from '../screens/TabNavigation/Verification';
 import Profile from '../screens/TabNavigation/Profile';
 import Icon from 'react-native-vector-icons/Feather';
@@ -29,8 +29,8 @@ const MyTabs = () => {
         // showLabel: false,
       }}>
       <Tab.Screen
-        name="Form"
-        component={Form}
+        name="Fromprod"
+        component={InserpProd}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (

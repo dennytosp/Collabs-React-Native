@@ -41,7 +41,7 @@ const Login = ({navigation}) => {
           .then(snapshot => {
             console.log(snapshot);
             ToastAndroid.show('Sign in successful!', ToastAndroid.SHORT);
-            navigation.navigate('Navigation');
+            navigation.navigate('Onboard');
           })
           .catch(error => {
             if (error.code === 'auth/email-already-in-use') {

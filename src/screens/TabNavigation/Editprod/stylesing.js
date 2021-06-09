@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#dddddd',
     borderBottomWidth: 2,
     fontSize: 16,
-    marginBottom: 20,
+    marginBottom: 10,
     paddingVertical: 20,
   },
   description: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   buttonWrapper: {
-    marginVertical: 30,
+    marginVertical: 22,
     alignItems: 'center',
   },
   button: {

@@ -9,21 +9,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import COLORS from '../../../consts/color';
-import auth from '@react-native-firebase/auth';
 import styles from './stylesing';
 
 const Verification = ({navigation}) => {
-  const SignOut = async () => {
-    await auth()
-      .signOut()
-      .then(() => {
-        navigation.navigate('Login');
-        ToastAndroid.show('User signed out!', ToastAndroid.SHORT);
-        auth().currentUser.reload();
-        // navigation.refresh();
-
-      });
-  };
   return (
     <View style={styles.container}>
       <StatusBar

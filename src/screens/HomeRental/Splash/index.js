@@ -33,7 +33,7 @@ const SplashScreens = ({navigation}) => {
         loop={false}
         speed={1}
         onAnimationFinish={() => {
-          user ? navigation.replace('Navigation') : navigation.replace('Login');
+          user ? navigation.replace('Onboard') : navigation.replace('Login');
         }}
       />
     </View>

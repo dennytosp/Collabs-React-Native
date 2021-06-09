@@ -55,7 +55,7 @@ const Onboard = ({navigation}) => {
           paddingBottom: 40,
         }}>
         {/* button */}
-        <Pressable onPress={() => navigation.navigate('HomeRetal')}>
+        <Pressable onPress={() => navigation.navigate('HomeRental')}>
           <View style={styles.btn}>
             <Text style={{color: 'white'}}>Get Started</Text>
           </View>

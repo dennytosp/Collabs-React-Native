@@ -10,9 +10,8 @@ const COLORS = {
     backup: '#5566ee',
     deweei: '#d73418',
     bonus: '#b09afb',
-
+    colorim: '#DAAA23',
     disn: '##3490dc',
-
   };
   export default COLORS;
   

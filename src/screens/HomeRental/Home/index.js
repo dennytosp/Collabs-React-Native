@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -16,11 +16,50 @@ import {
 import COLORS from '../../../consts/color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
+import auth from '@react-native-firebase/auth';
 const {width} = Dimensions.get('screen');
+
 import data from '../../../consts/data';
 import styles from './styles';
 
 const HomeRetal = ({navigation}) => {
+  const SignOut = async () => {
+    await auth()
+      .signOut()
+      .then(() => {
+        navigation.navigate('Login');
+        ToastAndroid.show('User signed out!', ToastAndroid.SHORT);
+        auth().currentUser.reload();
+        // navigation.refresh();
+
+      });
+  };
+
+  // const [name, setName] = useState();
+  // const [price, setPrice] = useState();
+  // const [description, setDescription] = useState();
+  // const [star, setStar] = useState();
+  // const [rating, setRating] = useState();
+  // const [rental, setRental] = useState();
+  // const idToken = auth().currentUser.uid;
+
+  // const product = async () => {
+  //   database()
+  //     .ref('Product/' + idToken)
+  //     .on('value', snapshot => {
+  //       setName(snapshot.val().name);
+  //       setPrice(snapshot.val().price);
+  //       setDescription(snapshot.val().description);
+  //       setStar(snapshot.val().star);
+  //       setRating(snapshot.val().rating);
+  //       setRental(snapshot.val().rental);
+  //     });
+  // };
+  // useEffect(() => {
+  //   product();
+  // }),
+  //   [product];
+
   const optionsList = [
     {title: 'Buy a Home', img: require('../../../assets/rental/house1.jpg')},
     {title: 'Rent a Home', img: require('../../../assets/rental/house2.jpg')},
@@ -75,9 +114,9 @@ const HomeRetal = ({navigation}) => {
           <Image source={house.image} style={styles.cardImage} />
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('Form')}
+            onPress={() => navigation.navigate('Editprod')}
             activeOpacity={0.8}
-            style={styles.editing}>
+            style={styles.btnEditing}>
             <Feather name="box" size={20} color={'#fafafa'} />
           </TouchableOpacity>
 
@@ -178,15 +217,24 @@ const HomeRetal = ({navigation}) => {
           contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
           horizontal
           data={data}
+          // renderItem={Card}
+          // keyExtractor={(item) => item.id}
           renderItem={({item}) => <Card house={item} />}
         />
       </ScrollView>
       <TouchableOpacity
-        onPress={() => navigation.navigate('Form')}
+        onPress={() => navigation.navigate('Insertprod')}
         activeOpacity={0.8}
-        style={styles.adding}>
+        style={styles.btnAdding}>
         <Feather name="twitter" size={26} color={'#fff'} />
       </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => SignOut()}
+        activeOpacity={0.8}
+        style={styles.btnLogout}>
+        <Feather name="toggle-left" size={16} color={'#fff'} />
+      </TouchableOpacity>
+
     </SafeAreaView>
   );
 };
