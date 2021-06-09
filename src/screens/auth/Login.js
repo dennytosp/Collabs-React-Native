@@ -131,7 +131,7 @@ const Login = ({navigation}) => {
             onPress={() => {
               SignIn(email, password);
             }}>
-            <Icon name="arrow-right" size={25} style={styles.iconButton} />
+            <Icon name="navigation" size={25} style={styles.iconButton} />
           </TouchableOpacity>
         </View>
       </View>

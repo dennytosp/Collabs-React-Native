@@ -19,7 +19,7 @@ const Onboard = ({navigation}) => {
 
       {/* Onboarding Image */}
       <Image
-        source={require('../../../assets/rental/onboardImage.jpg')}
+        source={require('../../../assets/shoes/shoes8.jpg')}
         style={styles.image}
       />
 

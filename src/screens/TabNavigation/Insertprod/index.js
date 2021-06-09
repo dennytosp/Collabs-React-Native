@@ -10,6 +10,7 @@ import {
   Pressable,
   ToastAndroid,
   Image,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Splash from '../../../assets/svg/paypal.svg';
@@ -200,6 +201,8 @@ const Inserprod = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+
       <StatusBar
         barStyle="light-content"
         backgroundColor={COLORS.primary}
@@ -290,10 +293,11 @@ const Inserprod = ({navigation}) => {
             onPress={() => {
               addProd(null, name, price, description, star, rating);
             }}>
-            <Icon name="arrow-right" size={25} style={styles.iconButton} />
+            <Icon name="plus" size={25} style={styles.iconButton} />
           </TouchableOpacity>
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };

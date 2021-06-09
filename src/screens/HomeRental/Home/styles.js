@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     backgroundColor: '#DAAA23',
     position: 'absolute',
+    // bottom: 300,
     bottom: 20,
     right: 20,
     justifyContent: 'center',

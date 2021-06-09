@@ -111,7 +111,7 @@ const HomeRetal = ({navigation}) => {
             <Image source={option.img} style={styles.optionsCardImage} />
 
             {/* Option title */}
-            <Text style={{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>
+            <Text style={{marginTop: 10, fontSize: 17, fontWeight: 'bold'}}>
               {option.title}
             </Text>
           </View>
