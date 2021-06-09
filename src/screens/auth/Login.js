@@ -9,16 +9,26 @@ import {
   TextInput,
   BackHandler,
   ToastAndroid,
+  Pressable,
+  Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Splash from '../../assets/svg/paypal.svg';
 import COLORS from '../../consts/color';
 import auth from '@react-native-firebase/auth';
 import styles from './styles/stylesLogin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import database from '@react-native-firebase/database';
 
 const Login = ({navigation}) => {
   // useEffect(() => {
   // }, [navigation.refresh()]);
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '146149352813-gm1fc62sej1u76jf2fcnjqnod6pmjmgk.apps.googleusercontent.com',
+    });
+  });
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -60,6 +70,51 @@ const Login = ({navigation}) => {
 
             console.error(error);
           });
+      }
+    }
+  };
+
+  const googleLogin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: false});
+
+      // Get the users ID token
+      const data = await GoogleSignin.signIn();
+
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(
+        data.idToken,
+        data.accessToken,
+      );
+
+      // Sign-in the user with the credential
+      await auth()
+        .signInWithCredential(googleCredential)
+        .then(() => {
+          database()
+            .ref('/User/' + auth().currentUser.uid)
+            .update({
+              uid: auth().currentUser.uid,
+              fullname: auth().currentUser.displayName,
+              avatar: auth().currentUser.photoURL,
+              email: auth().currentUser.email,
+            })
+            .then(console.log('Successful google login!'));
+          navigation.navigate('Onboard');
+        })
+
+        .catch(error => {
+          console.log('Something went wrong with sign up: ', error);
+        });
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.error(error);
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.error(error);
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.error(error);
+      } else {
+        console.error(error);
       }
     }
   };
@@ -133,6 +188,38 @@ const Login = ({navigation}) => {
             }}>
             <Icon name="navigation" size={25} style={styles.iconButton} />
           </TouchableOpacity>
+        </View>
+
+        <View style={styles.viewRowSocial}>
+          <View style={styles.viewCardSocial}>
+            <Pressable onPress={() => googleLogin()} style={styles.btnGoogle}>
+              <Image
+                source={require('../../assets/icon/ic_google.png')}
+                resizeMode="contain"
+                style={{height: 22, width: 22}}
+              />
+            </Pressable>
+
+            <Pressable
+              style={styles.btnFacebook}
+              onPress={() => {
+                // fbLogin();
+              }}>
+              <Image
+                source={require('../../assets/icon/ic_facebook.png')}
+                resizeMode="contain"
+                style={{height: 22, width: 22}}
+              />
+            </Pressable>
+
+            <View style={styles.btnTwitter}>
+              <Image
+                source={require('../../assets/icon/ic_twiter.png')}
+                resizeMode="contain"
+                style={{height: 22, width: 22}}
+              />
+            </View>
+          </View>
         </View>
       </View>
     </View>

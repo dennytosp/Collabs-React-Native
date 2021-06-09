@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   splash: {
     paddingTop: 60,
-    paddingBottom: 160,
+    paddingBottom: 120,
     alignItems: 'center',
   },
   content: {
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     alignItems: 'center',
-    marginVertical: 30,
+    marginVertical: 10,
   },
   button: {
     alignItems: 'center',
@@ -73,6 +73,58 @@ const styles = StyleSheet.create({
   },
   iconButton: {
     color: '#fff',
+  },
+
+  viewRowSocial: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  viewCardSocial: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+  },
+
+  btnGoogle: {
+    alignSelf: 'center',
+    width: 70,
+    height: 70,
+    shadowColor: '#000',
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 5,
+    borderRadius: 70 / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  btnFacebook: {
+    width: 70,
+    marginLeft: 16,
+    marginRight: 16,
+    height: 70,
+    borderRadius: 70 / 2,
+    shadowColor: '#000',
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 5,
+    borderRadius: 70 / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  btnTwitter: {
+    width: 70,
+    height: 70,
+    borderRadius: 70 / 2,
+    shadowColor: '#000',
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 5,
+    borderRadius: 70 / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
 });
 
