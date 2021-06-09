@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import auth from '@react-native-firebase/auth';
 const {width} = Dimensions.get('screen');
+import database from '@react-native-firebase/database';
 
 import data1 from '../../../consts/data';
 import styles from './styles';
@@ -34,13 +35,13 @@ const HomeRetal = ({navigation}) => {
       });
   };
 
-  const [data, setData] = useState();
 
-  const loadData = async () => {
+  const [data, setData] = useState([]);
+  const loadData = () => {
     database()
-      .ref('Product/')
-      .orderByChild('id')
-      .on('value', snapshot => {
+    .ref('Product/')
+    .orderByChild('id')
+    .on('value', (snapshot) => {
         if (snapshot.val() != null) {
           setData(Object.values(snapshot.val()));
         } else {
@@ -49,7 +50,7 @@ const HomeRetal = ({navigation}) => {
       });
   };
   useEffect(() => {
-    loadData;
+    loadData();
   }, []);
 
   const optionsList = [
@@ -100,7 +101,8 @@ const HomeRetal = ({navigation}) => {
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('Details', item)}>
+        onPress={() => navigation.navigate('Details', item)}
+        >
         <View style={styles.card}>
           {/* House image */}
           <Image
@@ -111,7 +113,15 @@ const HomeRetal = ({navigation}) => {
           />
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('Editprod')}
+            onPress={() => navigation.navigate('Editprod',{
+              nameProd: item.name,
+              priceProd: item.price,
+              descProd: item.description,
+              starProd: item.star,
+              ratingProd: item.rating,
+              imgProd: item.imageProd,
+              idProd: item.id
+            })}
             activeOpacity={0.8}
             style={styles.btnEditing}>
             <Feather name="box" size={20} color={'#fafafa'} />
@@ -130,14 +140,14 @@ const HomeRetal = ({navigation}) => {
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: COLORS.blue, fontSize: 16}}>
-                {item.price}
+                ${item.price}
               </Text>
             </View>
 
             {/* Location text */}
 
             <Text style={{color: COLORS.grey, fontSize: 14, marginTop: 5}}>
-              {/* {item.location} */}
+              {item.description}
             </Text>
 
             {/* Facilities container */}

@@ -19,9 +19,8 @@ import styles from './styles';
 
 const DetailsScreen = ({navigation, route}) => {
   const data = route.params;
-
   const InteriorCard = ({interior}) => {
-    return <Image source={interior} style={styles.interiorImage} />;
+    return <Image source={{uri: data.imageProd}} style={styles.interiorImage} />;
   };
 
   return (
@@ -30,7 +29,9 @@ const DetailsScreen = ({navigation, route}) => {
         {/* Data image */}
 
         <View style={styles.backgroundImageContainer}>
-          <ImageBackground style={styles.backgroundImage} source={data.image}>
+          <ImageBackground
+            style={styles.backgroundImage}
+            source={{uri: data.imageProd}}>
             <View style={styles.header}>
               <View style={styles.headerBtn}>
                 <TouchableOpacity>
@@ -43,7 +44,7 @@ const DetailsScreen = ({navigation, route}) => {
               </View>
               <View style={styles.headerBtn}>
                 <TouchableOpacity>
-                <Icon name="favorite" size={20} color={COLORS.red} />
+                  <Icon name="favorite" size={20} color={COLORS.red} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -58,18 +59,18 @@ const DetailsScreen = ({navigation, route}) => {
         <View style={styles.detailsContainer}>
           {/* Name and rating view container */}
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{data.title}</Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{data.name}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View style={styles.ratingTag}>
-                <Text style={{color: COLORS.white}}>4.8</Text>
+                <Text style={{color: COLORS.white}}>{data.star}</Text>
               </View>
-              <Text style={{fontSize: 13, marginLeft: 5}}>155 ratings</Text>
+              <Text style={{fontSize: 13, marginLeft: 5}}>{data.rating} ratings</Text>
             </View>
           </View>
 
           {/* Location text */}
           <Text style={{fontSize: 16, color: COLORS.grey}}>
-            {data.location}
+            {data.description}
           </Text>
 
           {/* Facilities container */}
@@ -88,7 +89,9 @@ const DetailsScreen = ({navigation, route}) => {
             </View>
           </View>
           <Text style={{marginTop: 20, color: COLORS.grey}}>
-            {data.details}
+            {/* {data.details} */}
+            Đẳng cấp phái mạnh, bức phá sự giới hạn với công nghệ 5.0 trí tuệ
+            thông minh định vị hình ảnh bước chân & những nguy hiểm rình rập
           </Text>
 
           {/* Interior list */}
@@ -97,8 +100,9 @@ const DetailsScreen = ({navigation, route}) => {
             horizontal
             showsHorizontalScrollIndicator={false}
             keyExtractor={(_, key) => key.toString()}
-            data={data.interiors}
-            renderItem={({item}) => <InteriorCard interior={item} />}
+            data={data.imageProd}
+            renderItem={InteriorCard}
+            // renderItem={({item}) => <InteriorCard interior={item} />}
           />
 
           {/* footer container */}
@@ -106,7 +110,7 @@ const DetailsScreen = ({navigation, route}) => {
             <View>
               <Text
                 style={{color: COLORS.blue, fontWeight: 'bold', fontSize: 18}}>
-                $1,500
+                ${data.price}
               </Text>
               <Text
                 style={{fontSize: 12, color: COLORS.grey, fontWeight: 'bold'}}>
