@@ -49,13 +49,14 @@ const Inserprod = ({navigation}) => {
         addImage(key, name, price, description, star, rating);
       } else {
         database()
-          .ref('Product' + key)
+          .ref('Product/' + key)
           .update({
             id: key,
             name: name,
             imageProd: '',
             price: price,
             uid: idToken,
+            
             description: description,
             star: star,
             rating: rating,
@@ -63,7 +64,7 @@ const Inserprod = ({navigation}) => {
           .then(snapshot => {
             resolve(snapshot);
             ToastAndroid.show('Insert successful!', ToastAndroid.SHORT);
-            // navigation.navigate('HomeRental');
+            navigation.navigate('HomeRental');
           })
           .catch(err => {
             reject(err);
@@ -104,7 +105,7 @@ const Inserprod = ({navigation}) => {
       .ref('Prod/' + filename)
       .getDownloadURL();
     database()
-      .ref('Product' + key)
+      .ref('Product/' + key)
       .update({
         id: key,
         name: name,

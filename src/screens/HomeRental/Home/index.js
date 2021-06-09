@@ -19,7 +19,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import auth from '@react-native-firebase/auth';
 const {width} = Dimensions.get('screen');
 
-import data from '../../../consts/data';
+import data1 from '../../../consts/data';
 import styles from './styles';
 
 const HomeRetal = ({navigation}) => {
@@ -31,34 +31,26 @@ const HomeRetal = ({navigation}) => {
         ToastAndroid.show('User signed out!', ToastAndroid.SHORT);
         auth().currentUser.reload();
         // navigation.refresh();
-
       });
   };
 
-  // const [name, setName] = useState();
-  // const [price, setPrice] = useState();
-  // const [description, setDescription] = useState();
-  // const [star, setStar] = useState();
-  // const [rating, setRating] = useState();
-  // const [rental, setRental] = useState();
-  // const idToken = auth().currentUser.uid;
+  const [data, setData] = useState();
 
-  // const product = async () => {
-  //   database()
-  //     .ref('Product/' + idToken)
-  //     .on('value', snapshot => {
-  //       setName(snapshot.val().name);
-  //       setPrice(snapshot.val().price);
-  //       setDescription(snapshot.val().description);
-  //       setStar(snapshot.val().star);
-  //       setRating(snapshot.val().rating);
-  //       setRental(snapshot.val().rental);
-  //     });
-  // };
-  // useEffect(() => {
-  //   product();
-  // }),
-  //   [product];
+  const loadData = async () => {
+    database()
+      .ref('Product/')
+      .orderByChild('id')
+      .on('value', snapshot => {
+        if (snapshot.val() != null) {
+          setData(Object.values(snapshot.val()));
+        } else {
+          setData(null);
+        }
+      });
+  };
+  useEffect(() => {
+    loadData;
+  }, []);
 
   const optionsList = [
     {title: 'Buy a Home', img: require('../../../assets/rental/house1.jpg')},
@@ -104,14 +96,19 @@ const HomeRetal = ({navigation}) => {
       </View>
     );
   };
-  const Card = ({house}) => {
+  const Card = ({item}) => {
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('Details', house)}>
+        onPress={() => navigation.navigate('Details', item)}>
         <View style={styles.card}>
           {/* House image */}
-          <Image source={house.image} style={styles.cardImage} />
+          <Image
+            source={{
+              uri: item.imageProd,
+            }}
+            style={styles.cardImage}
+          />
 
           <TouchableOpacity
             onPress={() => navigation.navigate('Editprod')}
@@ -129,18 +126,18 @@ const HomeRetal = ({navigation}) => {
                 marginTop: 10,
               }}>
               <Text style={{fontSize: 16, fontWeight: 'bold'}}>
-                {house.title}
+                {item.name}
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: COLORS.blue, fontSize: 16}}>
-                $1,500
+                {item.price}
               </Text>
             </View>
 
             {/* Location text */}
 
             <Text style={{color: COLORS.grey, fontSize: 14, marginTop: 5}}>
-              {house.location}
+              {/* {item.location} */}
             </Text>
 
             {/* Facilities container */}
@@ -163,6 +160,11 @@ const HomeRetal = ({navigation}) => {
       </Pressable>
     );
   };
+
+  // const renderItem = ({item}) => (
+  //   <Card item={item}/>
+  //   )
+
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
       {/* Customise status bar */}
@@ -217,9 +219,9 @@ const HomeRetal = ({navigation}) => {
           contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
           horizontal
           data={data}
-          // renderItem={Card}
-          // keyExtractor={(item) => item.id}
-          renderItem={({item}) => <Card house={item} />}
+          renderItem={Card}
+          keyExtractor={item => item.id}
+          // renderItem={({item}) => <Card item={item} />}
         />
       </ScrollView>
       <TouchableOpacity
@@ -234,7 +236,6 @@ const HomeRetal = ({navigation}) => {
         style={styles.btnLogout}>
         <Feather name="toggle-left" size={16} color={'#fff'} />
       </TouchableOpacity>
-
     </SafeAreaView>
   );
 };
