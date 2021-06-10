@@ -42,7 +42,7 @@ const Verfile = ({navigation, item}) => {
   function firstChar(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  // const usum = 'https://f37-zpg.zdn.vn/1288233568244316295/749b877574298077d938.jpg'
+  const usum = 'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg'
   const SignOut = async () => {
     await auth()
       .signOut()
@@ -74,8 +74,7 @@ const Verfile = ({navigation, item}) => {
         <View style={{alignSelf: 'center'}}>
           <View style={styles.profileImage}>
             <Image
-              // source={{uri: avatar != null ? avatar : usum}}
-              source={{uri: avatar}}
+              source={{uri: avatar != null ? avatar : usum}}
               style={styles.image}
               resizeMode="center"
             />
@@ -87,7 +86,7 @@ const Verfile = ({navigation, item}) => {
           </View>
           <View style={styles.active}></View>
           <View style={styles.add}>
-            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+            <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
               <Icon
                 name="edit-2"
                 size={32}

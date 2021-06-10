@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: undefined,
     height: undefined,
-    backgroundColor: COLORS.black,
   },
   titleBar: {
     flexDirection: 'row',
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   active: {
-    backgroundColor: COLORS.primary,
+    // backgroundColor: COLORS.primary,
     position: 'absolute',
     bottom: 20,
     left: 14,

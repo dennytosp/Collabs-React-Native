@@ -16,9 +16,31 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../../consts/color.js';
 const {width} = Dimensions.get('screen');
 import styles from './styles';
+import Share from 'react-native-share';
 
 const DetailsScreen = ({navigation, route}) => {
   const data = route.params;
+
+  const myCustomShare = async () => {
+    const shareOptions = {
+      // subject: 'Category: ' + data.idType.nameCategory,
+      message:
+      'Product Name: ' + data.name + 
+        '\n\nTotal Price: ' +
+        data.price +
+        '$' +
+        '\n\nDescription: ' +
+        data.description,
+      // urls: [data.imageProd],
+    };
+    try {
+      const ShareReponse = await Share.open(shareOptions);
+      console.log(JSON.stringify(ShareReponse));
+    } catch (error) {
+      console.log('Error =>', error);
+    }
+  };
+
   const InteriorCard = ({interior}) => {
     return <Image source={{uri: data.imageProd}} style={styles.interiorImage} />;
   };
@@ -117,9 +139,9 @@ const DetailsScreen = ({navigation, route}) => {
                 Total Price
               </Text>
             </View>
-            <View style={styles.bookNowBtn}>
-              <TouchableOpacity>
-                <Text style={{color: COLORS.white}}>Book Now</Text>
+            <View style={styles.shareNowBtn}>
+              <TouchableOpacity onPress={() => myCustomShare()}>
+                <Text style={{color: COLORS.white}}>Share Now</Text>
               </TouchableOpacity>
             </View>
           </View>

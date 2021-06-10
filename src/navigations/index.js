@@ -1,8 +1,8 @@
 import React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Insertprod from '../screens/TabNavigation/Insertprod';
-import Verification from '../screens/TabNavigation/Verification';
-import Profile from '../screens/TabNavigation/Profile';
+import Insertprod from '../screens/CreateUpdate/Insertprod';
+import Verification from '../screens/CreateUpdate/Verification';
+import Profile from '../screens/CreateUpdate/EditProfile';
 import Icon from 'react-native-vector-icons/Feather';
 import COLORS from '../consts/color';
 

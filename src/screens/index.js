@@ -5,19 +5,20 @@ import {View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import VerificationScreen from './TabNavigation/Verification';
-import ProfileScreen from './TabNavigation/Profile';
+import VerificationScreen from './CreateUpdate/Verification';
+import EditProfileScreen from './CreateUpdate/EditProfile';
+
 import NavigationScreens from '../navigations';
 import DetailsScreen from './HomeRental/Details';
 import HomeScreen from './HomeRental/Home';
 import OnboardScreen from './HomeRental/Onboard';
 import SplashScreen from './HomeRental/Splash';
-import VerfileScreen from './HomeRental/Verfile';
+import ProfileScreen from './HomeRental/Profile';
 import LoginScreen from './auth/Login';
 import RegisterScreen from './auth/Register';
 import ForgotPasswordScreen from './auth/forgotPassword';
-import InsertProdScreen from './TabNavigation/Insertprod';
-import EditProdScreen from './TabNavigation/Editprod';
+import InsertProdScreen from './CreateUpdate/Insertprod';
+import EditProdScreen from './CreateUpdate/Editprod';
 import OnboardingScreen from './HomeRental/Onboarding';
 
 const Stack = createStackNavigator();
@@ -54,7 +55,7 @@ const App = () => {
 
         {/* Navigation */}
         <Stack.Screen name="Navigation" component={NavigationScreens} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         <Stack.Screen name="Verification" component={VerificationScreen} />
         <Stack.Screen name="Insertprod" component={InsertProdScreen} />
         <Stack.Screen name="Editprod" component={EditProdScreen} />
@@ -66,7 +67,7 @@ const App = () => {
         <Stack.Screen name="HomeRental" component={HomeScreen} />
 
         <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Verfile" component={VerfileScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

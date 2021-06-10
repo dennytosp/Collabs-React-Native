@@ -204,7 +204,7 @@ const EditProd = ({navigation, route}) => {
             </TouchableOpacity>
           </View>
           <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={styles.headerText}>Edit Prod</Text>
+            <Text style={styles.headerText}>Edit Product</Text>
           </View>
           <View
             style={{

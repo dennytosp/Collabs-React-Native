@@ -29,6 +29,7 @@ const Profile = ({navigation}) => {
   const [imageServices, setImageServices] = useState(null);
   const [check, setCheck] = useState(false);
   const idToken = auth().currentUser.uid;
+  const usum = 'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg'
 
   useEffect(() => {
     database()
@@ -80,7 +81,7 @@ const Profile = ({navigation}) => {
           .then(snapshot => {
             resolve(snapshot);
             ToastAndroid.show('Successful!', ToastAndroid.SHORT);
-            navigation.navigate('Verfile');
+            navigation.goBack();
           })
           .catch(err => {
             reject(err);
@@ -137,7 +138,7 @@ const Profile = ({navigation}) => {
         .then(snapshot => {
           console.log(snapshot);
           ToastAndroid.show('Successful!', ToastAndroid.SHORT);
-          navigation.navigate('Verfile');
+          navigation.goBack();
         })
         .catch(err => {
           console.log(err);
@@ -156,7 +157,7 @@ const Profile = ({navigation}) => {
         .then(snapshot => {
           console.log(snapshot);
           ToastAndroid.show('Successful!', ToastAndroid.SHORT);
-          navigation.navigate('Verfile');
+          navigation.goBack();
         })
         .catch(err => {
           console.log(err);
@@ -191,14 +192,13 @@ const Profile = ({navigation}) => {
         <View style={styles.splash}>
           <Pressable onPress={() => ImageLibary()}>
             <Image
-              // source={require('../../../assets/deweei/person.jpg')}
               source={{
                 uri: check ? imageServices : avatar,
               }}
               style={{
                 width: 80,
                 height: 80,
-                backgroundColor: '#000',
+                backgroundColor: '#fff',
                 borderRadius: 100,
               }}
             />

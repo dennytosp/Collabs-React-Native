@@ -32,7 +32,7 @@ const ForgotPassword = ({navigation}) => {
       }else{
         auth().sendPasswordResetEmail(email).then(() => console.log('Sending'))
         .catch(err => console.log(err));
-        ToastAndroid.show('Hệ thống đã gởi cách đặt lại mật khẩu mới trên email', ToastAndroid.LONG);
+        ToastAndroid.show('Hệ thống đã gởi đường dẫn đặt lại mật khẩu, vui lòng kiểm tra email!', ToastAndroid.LONG);
         
       }
     }

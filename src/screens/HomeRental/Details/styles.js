@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 10,
   },
-  bookNowBtn: {
+  shareNowBtn: {
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
