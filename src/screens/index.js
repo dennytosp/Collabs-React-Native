@@ -15,6 +15,7 @@ import SplashScreen from './HomeRental/Splash';
 import VerfileScreen from './HomeRental/Verfile';
 import LoginScreen from './auth/Login';
 import RegisterScreen from './auth/Register';
+import ForgotPasswordScreen from './auth/forgotPassword';
 import InsertProdScreen from './TabNavigation/Insertprod';
 import EditProdScreen from './TabNavigation/Editprod';
 import OnboardingScreen from './HomeRental/Onboarding';
@@ -49,6 +50,7 @@ const App = () => {
         {/* Auth */}
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="Forgot" component={ForgotPasswordScreen} />
 
         {/* Navigation */}
         <Stack.Screen name="Navigation" component={NavigationScreens} />

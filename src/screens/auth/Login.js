@@ -49,37 +49,35 @@ const Login = ({navigation}) => {
   const SignIn = (email, password) => {
     if (email == null || password == null) {
       ToastAndroid.show('Please do not leave it blank!', ToastAndroid.SHORT);
+    } else if (!validateEmail(email)) {
+      ToastAndroid.show('Wrong email format!!', ToastAndroid.SHORT);
+    } else if (password.length < 6) {
+      ToastAndroid.show('Password is too short!', ToastAndroid.SHORT);
     } else {
-      if (!validateEmail(email)) {
-        ToastAndroid.show('Wrong email format!!', ToastAndroid.SHORT);
-      } else if (password.length < 6) {
-        ToastAndroid.show('Password is too short!', ToastAndroid.SHORT);
-      } else {
-        auth()
-          .signInWithEmailAndPassword(email, password)
-          .then(snapshot => {
-            console.log(snapshot);
-            ToastAndroid.show('Sign in successful!', ToastAndroid.SHORT);
-            navigation.navigate('Onboard');
-          })
-          .catch(error => {
-            if (error.code === 'auth/email-already-in-use') {
-              ToastAndroid.show(
-                'That email address is already in use!',
-                ToastAndroid.SHORT,
-              );
-            }
+      auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(snapshot => {
+          console.log(snapshot);
+          ToastAndroid.show('Logged in successfully!', ToastAndroid.SHORT);
+          navigation.navigate('Onboard');
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            ToastAndroid.show(
+              'That email address is already in use!',
+              ToastAndroid.SHORT,
+            );
+          }
 
-            if (error.code === 'auth/invalid-email') {
-              ToastAndroid.show(
-                'That email address is invalid!',
-                ToastAndroid.SHORT,
-              );
-            }
+          if (error.code === 'auth/invalid-email') {
+            ToastAndroid.show(
+              'That email address is invalid!',
+              ToastAndroid.SHORT,
+            );
+          }
 
-            console.error(error);
-          });
-      }
+          console.error(error);
+        });
     }
   };
 
@@ -130,7 +128,6 @@ const Login = ({navigation}) => {
                 navigation.navigate('Onboard');
               });
           }
-          console.log('KKK' + success.picture.data.url);
         }
       };
       const infoRequest = new GraphRequest(

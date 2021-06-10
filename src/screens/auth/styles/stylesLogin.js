@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   description: {
     color: '#989898',
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 17.5,
     padding: 18,
     fontWeight: '400',
   },

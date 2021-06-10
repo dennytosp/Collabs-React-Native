@@ -123,7 +123,7 @@ const Profile = ({navigation}) => {
       .ref('UserAvatar/' + filename)
       .getDownloadURL();
     if (url != null) {
-      console.log('loggggggggggggggggggg=>>>>>>>>>>>>>>>>>>>>>>');
+      console.log('>>>>>>>>>>>>>>>>>>>>> url != null >>>>>>>>>>>>>>>>>>>>>');
       database()
         .ref('User/' + idToken)
         .update({

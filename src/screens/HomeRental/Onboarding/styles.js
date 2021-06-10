@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   dotStyle: {
-    backgroundColor: colors.blueOnboardFaded,
+    backgroundColor: colors.blueFaded,
   },
   activeDotStyle: {
     backgroundColor: colors.blueOnboard,

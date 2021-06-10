@@ -14,55 +14,26 @@ import Splash from '../../assets/svg/paypal.svg';
 import COLORS from '../../consts/color';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
-import styles from './styles/stylesRegister';
+import styles from './styles/stylesForgotPassword';
 
-const Register = ({navigation}) => {
-  const [username, setUsername] = useState();
+const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [avatar, setAvatar] = useState();
   function validateEmail(email) {
     const wrongFormat =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return wrongFormat.test(String(email).toLowerCase());
   }
-  const SignUp = (username, email, password, avatar) => {
-    if (username == null || email == null || password == null) {
+  const Forgot = email => {
+    if (email == null) {
       ToastAndroid.show('Please do not leave it blank!', ToastAndroid.SHORT);
     } else {
       if (!validateEmail(email)) {
         ToastAndroid.show('Wrong email format!', ToastAndroid.SHORT);
-      } else if (password.length < 6) {
-        ToastAndroid.show('Password is too short!', ToastAndroid.SHORT);
-      } else {
-        auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then(() => {
-            const idTokenResult = auth().currentUser.uid;
-            database()
-              .ref('User/' + idTokenResult)
-              .update({
-                uid: idTokenResult,
-                username: username,
-                email: email,
-                avatar: avatar,
-              })
-              .then(snapshot => console.log(snapshot))
-              .catch(err => console.log(err));
-            ToastAndroid.show('Sign up successful!', ToastAndroid.SHORT);
-            navigation.navigate('Login');
-          })
-          .catch(error => {
-            if (error.code === 'auth/email-already-in-use') {
-              console.log('That email address is already in use!');
-            }
-
-            if (error.code === 'auth/invalid-email') {
-              console.log('That email address is invalid!');
-            }
-
-            console.error(error);
-          });
+      }else{
+        auth().sendPasswordResetEmail(email).then(() => console.log('Sending'))
+        .catch(err => console.log(err));
+        ToastAndroid.show('Hệ thống đã gởi cách đặt lại mật khẩu mới trên email', ToastAndroid.LONG);
+        
       }
     }
   };
@@ -83,7 +54,7 @@ const Register = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={styles.headerText}>Register</Text>
+            <Text style={styles.headerText}>Forgot Password</Text>
           </View>
           <View
             style={{
@@ -103,13 +74,6 @@ const Register = ({navigation}) => {
         <View>
           <TextInput
             style={styles.input}
-            placeholder="Your username"
-            placeholderTextColor="#ababab"
-            onChangeText={text => setUsername(text)}
-            // keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
             placeholder="Your email"
             placeholderTextColor="#ababab"
             // keyboardType="numeric"
@@ -117,27 +81,19 @@ const Register = ({navigation}) => {
             keyboardAppearance="light"
             onChangeText={text => setEmail(text)}
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Your password"
-            placeholderTextColor="#ababab"
-            onChangeText={text => setPassword(text)}
-            secureTextEntry={true}
-            // keyboardType="numeric"
-            keyboardAppearance="light"
-          />
         </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.description}>
-            If you forgot your password, please click here to retrieve it and use the app            </Text>
+              If you forgot your password, you can enter your email to confirm{' '}
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              SignUp(username, email, password, avatar);
+              Forgot(email);
             }}>
             <Icon name="arrow-right" size={25} style={styles.iconButton} />
           </TouchableOpacity>
@@ -147,4 +103,4 @@ const Register = ({navigation}) => {
   );
 };
 
-export default Register;
+export default ForgotPassword;
