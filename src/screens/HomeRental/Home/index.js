@@ -39,7 +39,8 @@ const HomeRetal = ({navigation}) => {
         // navigation.refresh();
       });
   };
-  const usum = 'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg'
+  const usum =
+    'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg';
   const loadAvatar = async () => {
     database()
       .ref('User/' + idToken)
@@ -138,24 +139,24 @@ const HomeRetal = ({navigation}) => {
             }}
             style={styles.cardImage}
           />
-
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Editprod', {
-                nameProd: item.name,
-                priceProd: item.price,
-                descProd: item.description,
-                starProd: item.star,
-                ratingProd: item.rating,
-                imgProd: item.imageProd,
-                idProd: item.id,
-              })
-            }
-            activeOpacity={0.8}
-            style={styles.btnEditing}>
-            <Feather name="edit-2" size={20} color={'#fafafa'} />
-          </TouchableOpacity>
-
+          {email == 'denny.tosp@gmail.com' || email == 'deweei@gmail.com' ? (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('Editprod', {
+                  nameProd: item.name,
+                  priceProd: item.price,
+                  descProd: item.description,
+                  starProd: item.star,
+                  ratingProd: item.rating,
+                  imgProd: item.imageProd,
+                  idProd: item.id,
+                })
+              }
+              activeOpacity={0.8}
+              style={styles.btnEditing}>
+              <Feather name="edit-2" size={20} color={'#fafafa'} />
+            </TouchableOpacity>
+          ) : null}
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
             <View
@@ -181,11 +182,14 @@ const HomeRetal = ({navigation}) => {
 
             {/* Facilities container */}
             <View style={{marginTop: 10, flexDirection: 'row'}}>
-              <View style={styles.facility}>
-                <TouchableOpacity style={{}} onPress={() => delProd(item.id)}>
-                  <Feather name="delete" size={16} color={'#000'} />
-                </TouchableOpacity>
-              </View>
+              {email == 'denny.tosp@gmail.com' ||
+              email == 'deweei@gmail.com' ? (
+                <View style={styles.facility}>
+                  <TouchableOpacity style={{}} onPress={() => delProd(item.id)}>
+                    <Feather name="delete" size={16} color={'#000'} />
+                  </TouchableOpacity>
+                </View>
+              ) : null}
               <View style={styles.facility}>
                 <Icon name="bathtub" size={18} />
                 <Text style={styles.facilityText}>2</Text>
@@ -264,12 +268,14 @@ const HomeRetal = ({navigation}) => {
           // renderItem={({item}) => <Card item={item} />}
         />
       </ScrollView>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Insertprod')}
-        activeOpacity={0.8}
-        style={styles.btnAdding}>
-        <Feather name="navigation" size={26} color={'#fff'} />
-      </TouchableOpacity>
+      {email == 'denny.tosp@gmail.com' || email == 'deweei@gmail.com' ? (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Insertprod')}
+          activeOpacity={0.8}
+          style={styles.btnAdding}>
+          <Feather name="navigation" size={26} color={'#fff'} />
+        </TouchableOpacity>
+      ) : null}
       {/* <TouchableOpacity
         onPress={() => SignOut()}
         activeOpacity={0.8}

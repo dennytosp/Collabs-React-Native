@@ -211,6 +211,16 @@ const Profile = ({navigation}) => {
         </View>
         {/* <Dropdown/> */}
         <View>
+        <TextInput
+            style={styles.input}
+            placeholder="Your email"
+            value={email}
+            editable={false}
+            onChangeText={text => setEmail(text)}
+            placeholderTextColor="#ababab"
+            keyboardType="email-address"
+            keyboardAppearance="light"
+          />
           <TextInput
             style={styles.input}
             placeholder="Your phone numbers"
@@ -226,15 +236,6 @@ const Profile = ({navigation}) => {
             value={username}
             onChangeText={text => setUsername(text)}
             placeholderTextColor="#ababab"
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Your email"
-            value={email}
-            onChangeText={text => setEmail(text)}
-            placeholderTextColor="#ababab"
-            keyboardType="email-address"
             keyboardAppearance="light"
           />
           <TextInput
