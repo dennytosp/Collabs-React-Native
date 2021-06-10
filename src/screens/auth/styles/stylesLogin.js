@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     color: '#989898',
     textAlign: 'center',
     fontSize: 18,
-    padding: 20,
+    padding: 18,
     fontWeight: '400',
   },
   buttonWrapper: {

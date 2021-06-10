@@ -24,12 +24,7 @@ import * as ImagePicker from 'react-native-image-picker';
 const EditProd = ({navigation, route}) => {
   const {nameProd, priceProd, descProd, starProd, ratingProd, imgProd, idProd} =
     route.params;
-  const [width, setWidth] = useState();
-  const [name, setName] = useState();
-  const [price, setPrice] = useState();
-  const [description, setDescription] = useState();
-  const [star, setStar] = useState();
-  const [rating, setRating] = useState();
+
   const [imageProd, setImageProd] = useState(imgProd);
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
@@ -74,14 +69,14 @@ const EditProd = ({navigation, route}) => {
       } else if (descEdit.length < 6) {
         ToastAndroid.show('Description too short!', ToastAndroid.SHORT);
       } else {
-        if (imageProd != null) {
+        if (imageServices != null) {
           addProd(id, name, price, description, star, rating);
         } else {
           database()
             .ref('Product/' + id)
             .update({
               name: name,
-              imageProd: '',
+              imageProd: imageProd,
               price: price,
               uid: idToken,
               description: description,
@@ -102,7 +97,7 @@ const EditProd = ({navigation, route}) => {
   };
 
   const addProd = async (key, name, price, description, star, rating) => {
-    const uri = imageProd;
+    const uri = imageServices;
     const filename = uri.substring(uri.lastIndexOf('/') + 1);
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
     // uploads file
@@ -185,7 +180,7 @@ const EditProd = ({navigation, route}) => {
       console.log('Response = ', response);
       if (response.uri) {
         setCheck(true);
-        setImageProd(response.uri);
+        setImageServices(response.uri);
       }
       if (response.didCancel) {
         setCheck(false);
@@ -222,7 +217,7 @@ const EditProd = ({navigation, route}) => {
             <Image
               // source={require('../../../assets/deweei/person.jpg')}
               source={{
-                uri: imageProd,
+                uri: check ? imageServices : imageProd,
               }}
               style={{
                 width: 120,
@@ -288,7 +283,7 @@ const EditProd = ({navigation, route}) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              editProd(idProd, name, price, description, star, rating);
+              editProd(idProd, nameEdit, priceEdit, descEdit, starEdit, rateEdit);
             }}>
             <Icon name="arrow-right" size={25} style={styles.iconButton} />
           </TouchableOpacity>

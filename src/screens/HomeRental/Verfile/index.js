@@ -43,6 +43,17 @@ const Verfile = ({navigation, item}) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  const SignOut = async () => {
+    await auth()
+      .signOut()
+      .then(() => {
+        navigation.navigate('Login');
+        ToastAndroid.show('User signed out!', ToastAndroid.SHORT);
+        auth().currentUser.reload();
+        // navigation.refresh();
+      });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" translucent={true}/>
@@ -66,8 +77,9 @@ const Verfile = ({navigation, item}) => {
               resizeMode="center"></Image>
           </View>
           <View style={styles.dm}>
-            <TouchableOpacity>
-              <Icon name="message-circle" size={18} color="#DFD8C8" />
+            <TouchableOpacity
+            onPress={() => SignOut()}>
+              <Icon name="toggle-left" size={18} color="#DFD8C8" />
             </TouchableOpacity>
           </View>
           <View style={styles.active}></View>
@@ -141,7 +153,7 @@ const Verfile = ({navigation, item}) => {
                 styles.text,
                 {fontSize: 24, color: '#DFD8C8', fontWeight: '300'},
               ]}>
-              70
+              03
             </Text>
             <Text
               style={[

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Collabs</string>
+    <string name="app_name">Paypal</string>
+    <string name="facebook_app_id">299487751889347</string>
 </resources>

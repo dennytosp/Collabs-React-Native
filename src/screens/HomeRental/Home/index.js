@@ -264,12 +264,12 @@ const HomeRetal = ({navigation}) => {
         style={styles.btnAdding}>
         <Feather name="navigation" size={26} color={'#fff'} />
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => SignOut()}
         activeOpacity={0.8}
         style={styles.btnLogout}>
         <Feather name="toggle-left" size={16} color={'#fff'} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </SafeAreaView>
   );
 };
