@@ -4,9 +4,9 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
+  ToastAndroid,
   View,
 } from 'react-native';
 import COLORS from '../../../consts/color';
@@ -42,7 +42,8 @@ const Verfile = ({navigation, item}) => {
   function firstChar(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  const usum = 'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg'
+  const usum =
+    'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg';
   const SignOut = async () => {
     await auth()
       .signOut()
@@ -86,7 +87,8 @@ const Verfile = ({navigation, item}) => {
           </View>
           <View style={styles.active}></View>
           <View style={styles.add}>
-            <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('EditProfile')}>
               <Icon
                 name="edit-2"
                 size={32}
@@ -98,10 +100,11 @@ const Verfile = ({navigation, item}) => {
         </View>
         <View style={styles.iconContainer}>
           <Text style={[styles.text, {fontWeight: '200', fontSize: 30}]}>
-            {/* {jsUcfirst(username)} */}@{username}
+            {/* {jsUcfirst(username)} */}
+            {fullname}
           </Text>
           <Text style={[styles.text, {color: '#AEB5BC', fontSize: 16}]}>
-            {fullname}
+            @{username}
           </Text>
         </View>
         <View style={styles.statusContainer}>

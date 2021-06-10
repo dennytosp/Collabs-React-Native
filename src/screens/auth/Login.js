@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StatusBar,
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,

@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StatusBar,
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
@@ -10,7 +9,6 @@ import {
   Pressable,
   ToastAndroid,
   Image,
-  ProgressBarAndroid,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Splash from '../../../assets/svg/paypal.svg';

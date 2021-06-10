@@ -7,11 +7,11 @@ import {
   TextInput,
   FlatList,
   Dimensions,
-  StyleSheet,
   Image,
   Pressable,
   ScrollView,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import COLORS from '../../../consts/color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -28,6 +28,7 @@ const HomeRetal = ({navigation}) => {
   const [username, setUsername] = useState();
   const [fullName, setFullname] = useState();
   const [avatar, setAvatar] = useState();
+  const [uiDing, setUiding] = useState();
   const idToken = auth().currentUser.uid;
   const SignOut = async () => {
     await auth()
@@ -46,6 +47,7 @@ const HomeRetal = ({navigation}) => {
       .ref('User/' + idToken)
       .on('value', snapshot => {
         setAvatar(snapshot.val().avatar);
+        setUiding(snapshot.val().uid);
         setEmail(snapshot.val().email);
         setUsername(snapshot.val().username);
         setFullname(snapshot.val().fullname);
@@ -53,7 +55,7 @@ const HomeRetal = ({navigation}) => {
   };
   useEffect(() => {
     loadAvatar();
-  });
+  }),[loadAvatar];
 
   const [data, setData] = useState([]);
   const loadData = () => {

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   SafeAreaView,
   StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
