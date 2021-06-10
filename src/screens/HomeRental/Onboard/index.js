@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StatusBar,
   View,
@@ -8,11 +8,16 @@ import {
   Image,
   Pressable,
   TouchableOpacity,
+  BackHandler,
 } from 'react-native';
 import COLORS from '../../../consts/color';
 import styles from './styles';
 
 const Onboard = ({navigation}) => {
+  useEffect(() => {
+    return () =>
+    BackHandler.removeEventListener('Login', () => true);
+  },  [])
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar translucent backgroundColor={COLORS.tranparent} />

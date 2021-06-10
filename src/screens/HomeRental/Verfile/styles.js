@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: undefined,
     height: undefined,
+    backgroundColor: COLORS.black,
   },
   titleBar: {
     flexDirection: 'row',

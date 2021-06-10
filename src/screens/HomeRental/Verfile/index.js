@@ -42,7 +42,7 @@ const Verfile = ({navigation, item}) => {
   function firstChar(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-
+  // const usum = 'https://f37-zpg.zdn.vn/1288233568244316295/749b877574298077d938.jpg'
   const SignOut = async () => {
     await auth()
       .signOut()
@@ -56,7 +56,11 @@ const Verfile = ({navigation, item}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" translucent={true}/>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="#fff"
+        translucent={true}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.titleBar}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -70,15 +74,14 @@ const Verfile = ({navigation, item}) => {
         <View style={{alignSelf: 'center'}}>
           <View style={styles.profileImage}>
             <Image
-              source={{
-                uri: avatar,
-              }}
+              // source={{uri: avatar != null ? avatar : usum}}
+              source={{uri: avatar}}
               style={styles.image}
-              resizeMode="center"></Image>
+              resizeMode="center"
+            />
           </View>
           <View style={styles.dm}>
-            <TouchableOpacity
-            onPress={() => SignOut()}>
+            <TouchableOpacity onPress={() => SignOut()}>
               <Icon name="toggle-left" size={18} color="#DFD8C8" />
             </TouchableOpacity>
           </View>
@@ -96,10 +99,9 @@ const Verfile = ({navigation, item}) => {
         </View>
         <View style={styles.iconContainer}>
           <Text style={[styles.text, {fontWeight: '200', fontSize: 30}]}>
-          {/* {jsUcfirst(username)} */} 
-          @{username}
+            {/* {jsUcfirst(username)} */}@{username}
           </Text>
-          <Text style={[styles.text, {color: '#AEB5BC', fontSize: 14}]}>
+          <Text style={[styles.text, {color: '#AEB5BC', fontSize: 16}]}>
             {fullname}
           </Text>
         </View>
@@ -173,7 +175,7 @@ const Verfile = ({navigation, item}) => {
             <View style={{width: 250}}>
               <Text
                 style={[styles.text, {color: '#41444B', fontWeight: '300'}]}>
-               Email: {email}
+                Email: {email}
               </Text>
             </View>
           </View>

@@ -106,7 +106,7 @@ const Login = ({navigation}) => {
           const facebookCredential = auth.FacebookAuthProvider.credential(
             tokenObj.accessToken,
           );
-          if (tokenObj) {
+          if (tokenObj.uid) {
             await auth()
               .signInWithCredential(facebookCredential)
               .then(console.log('Successful facebook login!'));
@@ -162,7 +162,7 @@ const Login = ({navigation}) => {
         data.accessToken,
       );
 
-      if (googleCredential) {
+      if (googleCredential.uid) {
         await auth()
           .signInWithCredential(googleCredential)
           .then(console.log('Successful google login!'));
