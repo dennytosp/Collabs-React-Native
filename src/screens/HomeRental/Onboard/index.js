@@ -35,7 +35,7 @@ const Onboard = ({navigation}) => {
         {/* Title container */}
         <View>
           <Text style={styles.title}>Find your</Text>
-          <Text style={styles.title}>sweet home</Text>
+          <Text style={styles.title}>quality shoes</Text>
         </View>
 
         {/* Text container */}

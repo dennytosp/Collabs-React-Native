@@ -17,7 +17,16 @@ import Splash from '../../assets/svg/paypal.svg';
 import COLORS from '../../consts/color';
 import auth from '@react-native-firebase/auth';
 import styles from './styles/stylesLogin';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  LoginManager,
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager,
+} from 'react-native-fbsdk-next';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import database from '@react-native-firebase/database';
 
 const Login = ({navigation}) => {
@@ -74,6 +83,75 @@ const Login = ({navigation}) => {
     }
   };
 
+  const fbLogin = async () => {
+    try {
+      // Attempt login with permissions
+      const result = await LoginManager.logInWithPermissions([
+        'public_profile',
+        'email',
+      ]);
+      if (result.isCancelled) {
+        throw 'User cancelled the login process';
+      }
+
+      // Once signed in, get the users AccesToken
+
+      const tokenObj = await AccessToken.getCurrentAccessToken();
+      if (!tokenObj) {
+        throw 'Something went wrong obtaining access token';
+      }
+      //
+      const infoResponseCallback = async (error, success) => {
+        if (error) {
+          console.log('eeeeeeeeeee', error);
+        } else {
+          const facebookCredential = auth.FacebookAuthProvider.credential(
+            tokenObj.accessToken,
+          );
+          if (tokenObj) {
+            await auth()
+              .signInWithCredential(facebookCredential)
+              .then(console.log('Successful facebook login!'));
+            navigation.navigate('Onboard');
+          } else {
+            await auth()
+              .signInWithCredential(facebookCredential)
+              .then(() => {
+                console.log(auth().currentUser);
+                database()
+                  .ref('/User/' + auth().currentUser.uid)
+                  .update({
+                    uid: auth().currentUser.uid,
+                    fullname: auth().currentUser.displayName,
+                    avatar: success.picture.data.url,
+                    email: auth().currentUser.email,
+                  })
+                  .then(console.log('Successful facebook login!'));
+                navigation.navigate('Onboard');
+              });
+          }
+          console.log('KKK' + success.picture.data.url);
+        }
+      };
+      const infoRequest = new GraphRequest(
+        '/me',
+        {
+          accessToken: tokenObj.accessToken,
+          parameters: {
+            fields: {
+              string:
+                'email,name,first_name,middle_name,last_name,gender,address,picture.type(large)',
+            },
+          },
+        },
+        infoResponseCallback,
+      );
+      new GraphRequestManager().addRequest(infoRequest).start();
+    } catch (err) {
+      console.log('error', err);
+    }
+  };
+
   const googleLogin = async () => {
     try {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: false});
@@ -87,25 +165,33 @@ const Login = ({navigation}) => {
         data.accessToken,
       );
 
+      if (googleCredential) {
+        await auth()
+          .signInWithCredential(googleCredential)
+          .then(console.log('Successful google login!'));
+        navigation.navigate('Onboard');
+      }
       // Sign-in the user with the credential
-      await auth()
-        .signInWithCredential(googleCredential)
-        .then(() => {
-          database()
-            .ref('/User/' + auth().currentUser.uid)
-            .update({
-              uid: auth().currentUser.uid,
-              fullname: auth().currentUser.displayName,
-              avatar: auth().currentUser.photoURL,
-              email: auth().currentUser.email,
-            })
-            .then(console.log('Successful google login!'));
-          navigation.navigate('Onboard');
-        })
+      else {
+        await auth()
+          .signInWithCredential(googleCredential)
+          .then(() => {
+            database()
+              .ref('/User/' + auth().currentUser.uid)
+              .update({
+                uid: auth().currentUser.uid,
+                fullname: auth().currentUser.displayName,
+                avatar: auth().currentUser.photoURL,
+                email: auth().currentUser.email,
+              })
+              .then(console.log('Successful google login!'));
+            navigation.navigate('Onboard');
+          })
 
-        .catch(error => {
-          console.log('Something went wrong with sign up: ', error);
-        });
+          .catch(error => {
+            console.log('Something went wrong with sign up: ', error);
+          });
+      }
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.error(error);
@@ -203,7 +289,7 @@ const Login = ({navigation}) => {
             <Pressable
               style={styles.btnFacebook}
               onPress={() => {
-                // fbLogin();
+                fbLogin();
               }}>
               <Image
                 source={require('../../assets/icon/ic_facebook.png')}

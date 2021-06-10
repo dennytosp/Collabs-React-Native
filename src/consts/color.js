@@ -12,7 +12,11 @@ const COLORS = {
 
     disn: '#3490dc',
     // primary: '#c4b1fd',
-
+    black: '#000000',
+    gray: '#666666',
+    blueOnboard: '#1C215D',
+    blueFaded: '#8D8FAD',
+  
   };
   export default COLORS;
   
