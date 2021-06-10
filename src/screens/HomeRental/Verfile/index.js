@@ -39,7 +39,7 @@ const Verfile = ({navigation, item}) => {
   }),
     [profile];
 
-  function jsUcfirst(string) {
+  function firstChar(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
