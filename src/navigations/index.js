@@ -1,6 +1,6 @@
 import React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Insertprod from '../screens/CreateUpdate/Insertprod';
+import InsertProd from '../screens/CreateUpdate/Insertprod';
 import Verification from '../screens/CreateUpdate/Verification';
 import Profile from '../screens/CreateUpdate/EditProfile';
 import Icon from 'react-native-vector-icons/Feather';
@@ -30,7 +30,7 @@ const MyTabs = () => {
       }}>
       <Tab.Screen
         name="Fromprod"
-        component={InserpProd}
+        component={Verification}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (

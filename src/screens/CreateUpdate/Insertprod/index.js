@@ -12,7 +12,6 @@ import {
   ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import Splash from '../../../assets/svg/paypal.svg';
 import COLORS from '../../../consts/color';
 import styles from './stylesing';
 import database from '@react-native-firebase/database';

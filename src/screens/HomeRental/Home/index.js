@@ -19,8 +19,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import auth from '@react-native-firebase/auth';
 const {width} = Dimensions.get('screen');
 import database from '@react-native-firebase/database';
-import icUser from '../../../assets/deweei/user.png';
-import data1 from '../../../consts/data';
 import styles from './styles';
 
 const HomeRetal = ({navigation}) => {
@@ -30,19 +28,10 @@ const HomeRetal = ({navigation}) => {
   const [avatar, setAvatar] = useState();
   const [uiDing, setUiding] = useState();
   const idToken = auth().currentUser.uid;
-  const SignOut = async () => {
-    await auth()
-      .signOut()
-      .then(() => {
-        navigation.navigate('Login');
-        ToastAndroid.show('User signed out!', ToastAndroid.SHORT);
-        auth().currentUser.reload();
-        // navigation.refresh();
-      });
-  };
   const usum =
     'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg';
-  const loadAvatar = async () => {
+
+  const loadInformation = async () => {
     database()
       .ref('User/' + idToken)
       .on('value', snapshot => {
@@ -53,11 +42,33 @@ const HomeRetal = ({navigation}) => {
         setFullname(snapshot.val().fullname);
       });
   };
+  // useEffect(() => {
+  //   loadInformation();
+  // }, [loadInformation]);
+
   useEffect(() => {
-    loadAvatar();
-  }),[loadAvatar];
+    let isCancelled = false;
+    const runAsync = async () => {
+      try {
+        if (!isCancelled) {
+          loadInformation()
+        }
+      } catch (e) {
+        if (!isCancelled) {
+          throw e;
+        }
+      }
+    };
+
+    runAsync();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [loadInformation]);
 
   const [data, setData] = useState([]);
+
   const loadData = () => {
     database()
       .ref('Product/')
@@ -70,8 +81,30 @@ const HomeRetal = ({navigation}) => {
         }
       });
   };
+
+  // useEffect(() => {
+  //   loadData();
+  // }, []);
+
   useEffect(() => {
-    loadData();
+    let isCancelled = false;
+    const runAsync = async () => {
+      try {
+        if (!isCancelled) {
+          loadData()
+        }
+      } catch (e) {
+        if (!isCancelled) {
+          throw e;
+        }
+      }
+    };
+
+    runAsync();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   const delProd = async id => {
@@ -194,11 +227,11 @@ const HomeRetal = ({navigation}) => {
               ) : null}
               <View style={styles.facility}>
                 <Icon name="bathtub" size={18} />
-                <Text style={styles.facilityText}>2</Text>
+                <Text style={styles.facilityText}>8</Text>
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={styles.facilityText}>100m</Text>
+                <Text style={styles.facilityText}>21s</Text>
               </View>
             </View>
           </View>

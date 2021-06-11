@@ -9,7 +9,6 @@ import {
   ToastAndroid,
   View,
 } from 'react-native';
-import COLORS from '../../../consts/color';
 import Icon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import database from '@react-native-firebase/database';
@@ -34,16 +33,40 @@ const Verfile = ({navigation, item}) => {
         setFullname(snapshot.val().fullname);
       });
   };
-  useEffect(() => {
-    profile();
-  }),
-    [profile];
 
+  // useEffect(() => {
+  //   profile();
+  // },[profile]);
+  
+  useEffect(() => {
+    let isCancelled = false;
+    const runAsync = async () => {
+      try {
+        if (!isCancelled) {
+          profile()
+        }
+      } catch (e) {
+        if (!isCancelled) {
+          throw e;
+        }
+      }
+    };
+
+    runAsync();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [profile]);
+
+  
   function firstChar(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
   const usum =
     'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg';
+
   const SignOut = async () => {
     await auth()
       .signOut()
@@ -63,15 +86,27 @@ const Verfile = ({navigation, item}) => {
         translucent={true}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.titleBar}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="chevron-left" size={24} color="#52575d" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Icon name="more-vertical" size={24} color="#52575d" />
-          </TouchableOpacity>
-        </View>
-
+        {email == 'deweei@gmail.com' || email == 'denny.tosp@gmail.com' ? (
+          <View style={styles.titleBar}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon name="chevron-left" size={24} color="#52575d" />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Icon name="plus" size={24} color="#52575d" />
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.titleBar}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon name="chevron-left" size={24} color="#52575d" />
+            </TouchableOpacity>
+            <TouchableOpacity
+            // onPress={() => navigation.navigate('Navigation')}
+            >
+              <Icon name="more-vertical" size={24} color="#52575d" />
+            </TouchableOpacity>
+          </View>
+        )}
         <View style={{alignSelf: 'center'}}>
           <View style={styles.profileImage}>
             <Image
@@ -149,6 +184,13 @@ const Verfile = ({navigation, item}) => {
                 resizeMode="cover"
               />
             </View>
+            <View style={styles.mediaImageContainer}>
+              <Image
+                source={require('../../../assets/rental/house3.jpg')}
+                style={styles.image}
+                resizeMode="cover"
+              />
+            </View>
           </ScrollView>
 
           <View style={styles.mediaCount}>
@@ -157,7 +199,7 @@ const Verfile = ({navigation, item}) => {
                 styles.text,
                 {fontSize: 24, color: '#DFD8C8', fontWeight: '300'},
               ]}>
-              03
+              04
             </Text>
             <Text
               style={[

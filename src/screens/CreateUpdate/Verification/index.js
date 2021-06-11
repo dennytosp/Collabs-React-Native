@@ -20,7 +20,9 @@ const Verification = ({navigation}) => {
       />
       <SafeAreaView style={styles.headerWrapper}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => SignOut()}>
+          <TouchableOpacity onPress={() => {
+            
+          }}>
             <Icon name="chevron-left" size={24} style={styles.iconWhite} />
           </TouchableOpacity>
           <View style={{flex: 1, alignItems: 'center'}}>

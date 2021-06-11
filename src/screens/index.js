@@ -26,17 +26,48 @@ const Stack = createStackNavigator();
 const App = () => {
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   let routeName;
+  
   useEffect(() => {
-    AsyncStorage.getItem('Onboardingfirst').then(value => {
-      if (value == null) {
-        AsyncStorage.setItem('Onboardingfirst', 'true');
-        setIsFirstLaunch(true);
-      } else {
-        setIsFirstLaunch(false);
+    let isCancelled = false;
+    const runAsync = async () => {
+      try {
+        if (!isCancelled) {
+          AsyncStorage.getItem('Onboardingfirst').then(value => {
+            if (value == null) {
+              AsyncStorage.setItem('Onboardingfirst', 'true');
+              setIsFirstLaunch(true);
+            } else {
+              setIsFirstLaunch(false);
+            }
+          });
+              }
+      } catch (e) {
+        if (!isCancelled) {
+          throw e;
+        }
       }
-    });
+    };
+
+    runAsync();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
+
+  // useEffect(() => {
+  //   AsyncStorage.getItem('Onboardingfirst').then(value => {
+  //     if (value == null) {
+  //       AsyncStorage.setItem('Onboardingfirst', 'true');
+  //       setIsFirstLaunch(true);
+  //     } else {
+  //       setIsFirstLaunch(false);
+  //     }
+  //   });
+  // }, []);
+
+  
   if (isFirstLaunch === null) {
     return null;
   } else if (isFirstLaunch == true) {

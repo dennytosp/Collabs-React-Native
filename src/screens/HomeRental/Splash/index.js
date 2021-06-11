@@ -14,9 +14,31 @@ const SplashScreens = ({navigation}) => {
     if (initializing) setInitializing(false);
   }
 
+  // useEffect(() => {
+  //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+  //   return subscriber; // unsubscribe on unmount
+  // }, []);
+
   useEffect(() => {
+    let isCancelled = false;
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
+    const runAsync = async () => {
+      try {
+        if (!isCancelled) {
+          subscriber()
+        }
+      } catch (e) {
+        if (!isCancelled) {
+          throw e;
+        }
+      }
+    };
+
+    runAsync();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   if (initializing) return null;

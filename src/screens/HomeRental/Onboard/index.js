@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   StatusBar,
   View,
@@ -6,17 +6,41 @@ import {
   SafeAreaView,
   Image,
   Pressable,
-  TouchableOpacity,
   BackHandler,
 } from 'react-native';
 import COLORS from '../../../consts/color';
 import styles from './styles';
 
 const Onboard = ({navigation}) => {
-  useEffect(() => {
-    return () =>
+  // useEffect(() => {
+  //   return () => BackHandler.removeEventListener('Login', () => true);
+  // }, []);
+
+  const disableLogin = async () => {
     BackHandler.removeEventListener('Login', () => true);
-  },  [])
+  };
+
+  useEffect(() => {
+    let isCancelled = false;
+    const runAsync = async () => {
+      try {
+        if (!isCancelled) {
+          disableLogin();
+        }
+      } catch (e) {
+        if (!isCancelled) {
+          throw e;
+        }
+      }
+    };
+
+    runAsync();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar translucent backgroundColor={COLORS.tranparent} />

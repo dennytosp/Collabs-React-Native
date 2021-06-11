@@ -11,7 +11,6 @@ import {
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import Splash from '../../../assets/svg/paypal.svg';
 import COLORS from '../../../consts/color';
 import styles from './stylesing';
 import database from '@react-native-firebase/database';
@@ -31,7 +30,7 @@ const EditProd = ({navigation, route}) => {
   const [imageServices, setImageServices] = useState(null);
   const [check, setCheck] = useState(false);
   const idToken = auth().currentUser.uid;
-  
+
   // change text update
   const [nameEdit, setNameEdit] = useState(nameProd);
   const [priceEdit, setPriceEdit] = useState(priceProd);
@@ -281,7 +280,14 @@ const EditProd = ({navigation, route}) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              editProd(idProd, nameEdit, priceEdit, descEdit, starEdit, rateEdit);
+              editProd(
+                idProd,
+                nameEdit,
+                priceEdit,
+                descEdit,
+                starEdit,
+                rateEdit,
+              );
             }}>
             <Icon name="arrow-right" size={25} style={styles.iconButton} />
           </TouchableOpacity>

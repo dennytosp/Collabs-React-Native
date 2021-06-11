@@ -19,6 +19,9 @@ import storage from '@react-native-firebase/storage';
 import * as ImagePicker from 'react-native-image-picker';
 
 const Profile = ({navigation}) => {
+  const [uploading, setUploading] = useState(false);
+  const [transferred, setTransferred] = useState(0);
+
   const [phonenumbers, setPhonenumbers] = useState();
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
@@ -27,9 +30,10 @@ const Profile = ({navigation}) => {
   const [imageServices, setImageServices] = useState(null);
   const [check, setCheck] = useState(false);
   const idToken = auth().currentUser.uid;
-  const usum = 'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg'
+  const usum =
+    'https://f37-zpg.zdn.vn/2042059238978378618/80a3438125ded18088cf.jpg';
 
-  useEffect(() => {
+  const loadData = async () => {
     database()
       .ref('/User/' + idToken)
       .on('value', snapshot => {
@@ -41,6 +45,31 @@ const Profile = ({navigation}) => {
           setAvatar(snapshot.val().avatar);
         }
       });
+  };
+
+  // useEffect(() => {
+  //     loadData()
+  // }, [idToken])
+
+  useEffect(() => {
+    let isCancelled = false;
+    const runAsync = async () => {
+      try {
+        if (!isCancelled) {
+          loadData();
+        }
+      } catch (e) {
+        if (!isCancelled) {
+          throw e;
+        }
+      }
+    };
+
+    runAsync();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [idToken]);
 
   const ImageLibary = () => {
@@ -53,9 +82,8 @@ const Profile = ({navigation}) => {
         // console.log('asset >>>>>>>>>>>>>>>>>>>>',response.assets[0].uri)
         setCheck(true);
         setImageServices(response.uri);
-        
       }
-      if(response.didCancel){
+      if (response.didCancel) {
         setCheck(false);
       }
     });
@@ -78,6 +106,7 @@ const Profile = ({navigation}) => {
           })
           .then(snapshot => {
             resolve(snapshot);
+            console.log('Sucessful!');
             ToastAndroid.show('Successful!', ToastAndroid.SHORT);
             navigation.goBack();
           })
@@ -99,8 +128,8 @@ const Profile = ({navigation}) => {
     const task = storage()
       .ref('UserAvatar/' + filename)
       .putFile(uploadUri);
-    // setUploading(true);
-    // setTransferred(0);
+    setUploading(true);
+    setTransferred(0);
     task.on('state_changed', taskSnapshot => {
       console.log(
         `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
@@ -135,6 +164,7 @@ const Profile = ({navigation}) => {
         })
         .then(snapshot => {
           console.log(snapshot);
+          console.log('Sucessful!');
           ToastAndroid.show('Successful!', ToastAndroid.SHORT);
           navigation.goBack();
         })
@@ -209,7 +239,7 @@ const Profile = ({navigation}) => {
         </View>
         {/* <Dropdown/> */}
         <View>
-        <TextInput
+          <TextInput
             style={styles.input}
             placeholder="Your email"
             value={email}

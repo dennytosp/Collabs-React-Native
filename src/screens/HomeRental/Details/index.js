@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   View,
   Text,
-  StyleSheet,
   FlatList,
   Image,
   Dimensions,
