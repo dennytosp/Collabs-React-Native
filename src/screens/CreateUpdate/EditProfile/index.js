@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  ScrollView,
   ToastAndroid,
   Image,
 } from 'react-native';
@@ -194,6 +195,7 @@ const Profile = ({navigation}) => {
   };
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <StatusBar
         barStyle="light-content"
@@ -286,6 +288,7 @@ const Profile = ({navigation}) => {
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 };
 

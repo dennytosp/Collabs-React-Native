@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  ScrollView,
   ToastAndroid,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
@@ -68,6 +69,7 @@ const Register = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <ScrollView>
       <StatusBar
         barStyle="light-content"
         backgroundColor={COLORS.primary}
@@ -142,6 +144,7 @@ const Register = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };

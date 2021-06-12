@@ -34,8 +34,9 @@ const Inserprod = ({navigation}) => {
   const [imageServices, setImageServices] = useState(null);
   const [check, setCheck] = useState(false);
   const idToken = auth().currentUser.uid;
-  
-  const usum = 'https://i.pinimg.com/originals/d2/df/bc/d2dfbc2b0b6639cdf7d942688379a8a9.jpg'
+
+  const usum =
+    'https://i.pinimg.com/originals/d2/df/bc/d2dfbc2b0b6639cdf7d942688379a8a9.jpg';
 
   const addProd = (id, name, price, description, star, rating) => {
     return new Promise(function (resolve, reject) {
@@ -201,102 +202,101 @@ const Inserprod = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={COLORS.primary}
+          translucent={true}
+        />
 
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={COLORS.primary}
-        translucent={true}
-      />
-
-      <SafeAreaView style={styles.headerWrapper}>
-        <View style={styles.header}>
-          <View>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="chevron-left" size={24} style={styles.iconWhite} />
-            </TouchableOpacity>
-          </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={styles.headerText}>Add Product</Text>
-          </View>
-          <View
-            style={{
-              width: 20,
-            }}
-          />
-        </View>
-        <View style={styles.splash}>
-          <Pressable onPress={() => ImageLibary()}>
-            <Image
-              // source={require('../../../assets/deweei/person.jpg')}
-
-              source={{
-                uri: imageProd != null ? imageProd : usum,
-              }}
+        <SafeAreaView style={styles.headerWrapper}>
+          <View style={styles.header}>
+            <View>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon name="chevron-left" size={24} style={styles.iconWhite} />
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Text style={styles.headerText}>Add Product</Text>
+            </View>
+            <View
               style={{
-                width: 120,
-                height: 120,
-                borderRadius: 20,
+                width: 20,
               }}
             />
-          </Pressable>
+          </View>
+          <View style={styles.splash}>
+            <Pressable onPress={() => ImageLibary()}>
+              <Image
+                // source={require('../../../assets/deweei/person.jpg')}
+
+                source={{
+                  uri: imageProd != null ? imageProd : usum,
+                }}
+                style={{
+                  width: 120,
+                  height: 120,
+                  borderRadius: 20,
+                }}
+              />
+            </Pressable>
+          </View>
+        </SafeAreaView>
+        <View style={styles.content}>
+          <View>
+            <Text style={styles.title}>Personal Information</Text>
+          </View>
+          {/* <Dropdown/> */}
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter product name"
+              placeholderTextColor="#ababab"
+              onChangeText={text => setName(text)}
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter product price"
+              onChangeText={text => setPrice(text)}
+              placeholderTextColor="#ababab"
+              keyboardType="numeric"
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter product description"
+              onChangeText={text => setDescription(text)}
+              placeholderTextColor="#ababab"
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter the number of stars of the product"
+              placeholderTextColor="#ababab"
+              keyboardType="numeric"
+              onChangeText={text => setStar(text)}
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter product reviews"
+              placeholderTextColor="#ababab"
+              keyboardType="numeric"
+              onChangeText={text => setRating(text)}
+              keyboardAppearance="light"
+            />
+          </View>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                addProd(null, name, price, description, star, rating);
+              }}>
+              <Icon name="plus" size={25} style={styles.iconButton} />
+            </TouchableOpacity>
+          </View>
         </View>
-      </SafeAreaView>
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.title}>Personal Information</Text>
-        </View>
-        {/* <Dropdown/> */}
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter product name"
-            placeholderTextColor="#ababab"
-            onChangeText={text => setName(text)}
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Enter product price"
-            onChangeText={text => setPrice(text)}
-            placeholderTextColor="#ababab"
-            keyboardType="numeric"
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Enter product description"
-            onChangeText={text => setDescription(text)}
-            placeholderTextColor="#ababab"
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Enter the number of stars of the product"
-            placeholderTextColor="#ababab"
-            keyboardType="numeric"
-            onChangeText={text => setStar(text)}
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Enter product reviews"
-            placeholderTextColor="#ababab"
-            keyboardType="numeric"
-            onChangeText={text => setRating(text)}
-            keyboardAppearance="light"
-          />
-        </View>
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              addProd(null, name, price, description, star, rating);
-            }}>
-            <Icon name="plus" size={25} style={styles.iconButton} />
-          </TouchableOpacity>
-        </View>
-      </View>
       </ScrollView>
     </View>
   );

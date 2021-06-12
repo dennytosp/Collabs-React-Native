@@ -9,6 +9,7 @@ import {
   Pressable,
   ToastAndroid,
   Image,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import COLORS from '../../../consts/color';
@@ -192,107 +193,108 @@ const EditProd = ({navigation, route}) => {
         backgroundColor={COLORS.primary}
         translucent={true}
       />
-
-      <SafeAreaView style={styles.headerWrapper}>
-        <View style={styles.header}>
-          <View>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="chevron-left" size={24} style={styles.iconWhite} />
-            </TouchableOpacity>
-          </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={styles.headerText}>Edit Product</Text>
-          </View>
-          <View
-            style={{
-              width: 20,
-            }}
-          />
-        </View>
-        <View style={styles.splash}>
-          <Pressable onPress={() => ImageLibary()}>
-            <Image
-              // source={require('../../../assets/deweei/person.jpg')}
-              source={{
-                uri: check ? imageServices : imageProd,
-              }}
+      <ScrollView>
+        <SafeAreaView style={styles.headerWrapper}>
+          <View style={styles.header}>
+            <View>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon name="chevron-left" size={24} style={styles.iconWhite} />
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Text style={styles.headerText}>Edit Product</Text>
+            </View>
+            <View
               style={{
-                width: 120,
-                height: 120,
-                backgroundColor: '#090919',
-                borderRadius: 20,
+                width: 20,
               }}
             />
-          </Pressable>
+          </View>
+          <View style={styles.splash}>
+            <Pressable onPress={() => ImageLibary()}>
+              <Image
+                // source={require('../../../assets/deweei/person.jpg')}
+                source={{
+                  uri: check ? imageServices : imageProd,
+                }}
+                style={{
+                  width: 120,
+                  height: 120,
+                  backgroundColor: '#090919',
+                  borderRadius: 20,
+                }}
+              />
+            </Pressable>
+          </View>
+        </SafeAreaView>
+        <View style={styles.content}>
+          <View>
+            <Text style={styles.title}>Personal Information</Text>
+          </View>
+          {/* <Dropdown/> */}
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter product name"
+              placeholderTextColor="#ababab"
+              value={nameEdit}
+              onChangeText={text => setNameEdit(text)}
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter product price"
+              value={priceEdit}
+              onChangeText={text => setPriceEdit(text)}
+              placeholderTextColor="#ababab"
+              keyboardType="numeric"
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter product description"
+              value={descEdit}
+              onChangeText={text => setDescEdit(text)}
+              placeholderTextColor="#ababab"
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter the number of stars of the product"
+              placeholderTextColor="#ababab"
+              value={starEdit}
+              keyboardType="numeric"
+              onChangeText={text => setStarEdit(text)}
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              value={rateEdit}
+              placeholder="Enter product reviews"
+              placeholderTextColor="#ababab"
+              keyboardType="numeric"
+              onChangeText={text => setRateEdit(text)}
+              keyboardAppearance="light"
+            />
+          </View>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                editProd(
+                  idProd,
+                  nameEdit,
+                  priceEdit,
+                  descEdit,
+                  starEdit,
+                  rateEdit,
+                );
+              }}>
+              <Icon name="arrow-right" size={25} style={styles.iconButton} />
+            </TouchableOpacity>
+          </View>
         </View>
-      </SafeAreaView>
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.title}>Personal Information</Text>
-        </View>
-        {/* <Dropdown/> */}
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter product name"
-            placeholderTextColor="#ababab"
-            value={nameEdit}
-            onChangeText={text => setNameEdit(text)}
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Enter product price"
-            value={priceEdit}
-            onChangeText={text => setPriceEdit(text)}
-            placeholderTextColor="#ababab"
-            keyboardType="numeric"
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Enter product description"
-            value={descEdit}
-            onChangeText={text => setDescEdit(text)}
-            placeholderTextColor="#ababab"
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Enter the number of stars of the product"
-            placeholderTextColor="#ababab"
-            value={starEdit}
-            keyboardType="numeric"
-            onChangeText={text => setStarEdit(text)}
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            value={rateEdit}
-            placeholder="Enter product reviews"
-            placeholderTextColor="#ababab"
-            keyboardType="numeric"
-            onChangeText={text => setRateEdit(text)}
-            keyboardAppearance="light"
-          />
-        </View>
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              editProd(
-                idProd,
-                nameEdit,
-                priceEdit,
-                descEdit,
-                starEdit,
-                rateEdit,
-              );
-            }}>
-            <Icon name="arrow-right" size={25} style={styles.iconButton} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

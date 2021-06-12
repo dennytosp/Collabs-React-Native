@@ -10,6 +10,7 @@ import {
   ToastAndroid,
   Pressable,
   Image,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Splash from '../../assets/svg/paypal.svg';
@@ -203,6 +204,7 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <ScrollView>
       <StatusBar
         barStyle="light-content"
         backgroundColor={COLORS.primary}
@@ -304,6 +306,7 @@ const Login = ({navigation}) => {
           </View>
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };

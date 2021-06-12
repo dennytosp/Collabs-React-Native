@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   ToastAndroid,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Splash from '../../assets/svg/paypal.svg';
@@ -29,76 +30,82 @@ const ForgotPassword = ({navigation}) => {
     } else {
       if (!validateEmail(email)) {
         ToastAndroid.show('Wrong email format!', ToastAndroid.SHORT);
-      }else{
-        auth().sendPasswordResetEmail(email).then(() => console.log('Sending'))
-        .catch(err => console.log(err));
-        ToastAndroid.show('Hệ thống đã gởi đường dẫn đặt lại mật khẩu, vui lòng kiểm tra email!', ToastAndroid.LONG);
-        
+      } else {
+        auth()
+          .sendPasswordResetEmail(email)
+          .then(() => console.log('Sending'))
+          .catch(err => console.log(err));
+        ToastAndroid.show(
+          'Hệ thống đã gởi đường dẫn đặt lại mật khẩu, vui lòng kiểm tra email!',
+          ToastAndroid.LONG,
+        );
       }
     }
   };
 
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={COLORS.primary}
-        translucent={true}
-      />
+      <ScrollView>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={COLORS.primary}
+          translucent={true}
+        />
 
-      <SafeAreaView style={styles.headerWrapper}>
-        <View style={styles.header}>
+        <SafeAreaView style={styles.headerWrapper}>
+          <View style={styles.header}>
+            <View>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon name="chevron-left" size={24} style={styles.iconWhite} />
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Text style={styles.headerText}>Forgot Password</Text>
+            </View>
+            <View
+              style={{
+                width: 20,
+              }}
+            />
+          </View>
+          <View style={styles.splash}>
+            <Splash width={80} height={80} />
+          </View>
+        </SafeAreaView>
+        <View style={styles.content}>
+          <View>
+            <Text style={styles.title}>Personal Information</Text>
+          </View>
+          {/* <Dropdown/> */}
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Your email"
+              placeholderTextColor="#ababab"
+              // keyboardType="numeric"
+              keyboardType="email-address"
+              keyboardAppearance="light"
+              onChangeText={text => setEmail(text)}
+            />
+          </View>
           <View>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="chevron-left" size={24} style={styles.iconWhite} />
+              <Text style={styles.description}>
+                If you forgot your password, you can enter your email to confirm{' '}
+              </Text>
             </TouchableOpacity>
           </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={styles.headerText}>Forgot Password</Text>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                Forgot(email);
+              }}>
+              <Icon name="arrow-right" size={25} style={styles.iconButton} />
+            </TouchableOpacity>
           </View>
-          <View
-            style={{
-              width: 20,
-            }}
-          />
         </View>
-        <View style={styles.splash}>
-          <Splash width={80} height={80} />
-        </View>
-      </SafeAreaView>
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.title}>Personal Information</Text>
-        </View>
-        {/* <Dropdown/> */}
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Your email"
-            placeholderTextColor="#ababab"
-            // keyboardType="numeric"
-            keyboardType="email-address"
-            keyboardAppearance="light"
-            onChangeText={text => setEmail(text)}
-          />
-        </View>
-        <View>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.description}>
-              If you forgot your password, you can enter your email to confirm{' '}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              Forgot(email);
-            }}>
-            <Icon name="arrow-right" size={25} style={styles.iconButton} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
