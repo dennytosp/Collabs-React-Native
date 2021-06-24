@@ -102,11 +102,11 @@ const DetailsScreen = ({navigation, route}) => {
             </View>
             <View style={styles.facility}>
               <Icon name="bathtub" size={18} />
-              <Text style={styles.facilityText}>2</Text>
+              <Text style={styles.facilityText}>08</Text>
             </View>
             <View style={styles.facility}>
               <Icon name="aspect-ratio" size={18} />
-              <Text style={styles.facilityText}>100m area</Text>
+              <Text style={styles.facilityText}>21mm area</Text>
             </View>
           </View>
           <Text style={{marginTop: 20, color: COLORS.grey}}>

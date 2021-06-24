@@ -51,7 +51,7 @@ const HomeRetal = ({navigation}) => {
     const runAsync = async () => {
       try {
         if (!isCancelled) {
-          loadInformation()
+          loadInformation();
         }
       } catch (e) {
         if (!isCancelled) {
@@ -91,7 +91,7 @@ const HomeRetal = ({navigation}) => {
     const runAsync = async () => {
       try {
         if (!isCancelled) {
-          loadData()
+          loadData();
         }
       } catch (e) {
         if (!isCancelled) {
@@ -227,11 +227,11 @@ const HomeRetal = ({navigation}) => {
               ) : null}
               <View style={styles.facility}>
                 <Icon name="bathtub" size={18} />
-                <Text style={styles.facilityText}>8</Text>
+                <Text style={styles.facilityText}>08</Text>
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={styles.facilityText}>21s</Text>
+                <Text style={styles.facilityText}>21mm area</Text>
               </View>
             </View>
           </View>
