@@ -174,7 +174,9 @@ const HomeRetal = ({navigation}) => {
             }}
             style={styles.cardImage}
           />
-          {email == 'denny.tosp@gmail.com' || email == 'deweei@gmail.com' ? (
+          {email == 'denny.tosp@gmail.com' ||
+          email == 'deweei@gmail.com' ||
+          email == 'dewind@gmail.com' ? (
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate('Editprod', {
@@ -218,7 +220,8 @@ const HomeRetal = ({navigation}) => {
             {/* Facilities container */}
             <View style={{marginTop: 10, flexDirection: 'row'}}>
               {email == 'denny.tosp@gmail.com' ||
-              email == 'deweei@gmail.com' ? (
+              email == 'deweei@gmail.com' ||
+              email == 'dewind@gmail.com' ? (
                 <View style={styles.facility}>
                   <TouchableOpacity style={{}} onPress={() => delProd(item.id)}>
                     <Feather name="delete" size={16} color={'#000'} />
@@ -303,12 +306,14 @@ const HomeRetal = ({navigation}) => {
           // renderItem={({item}) => <Card item={item} />}
         />
       </ScrollView>
-      {email == 'denny.tosp@gmail.com' || email == 'deweei@gmail.com' ? (
+      {email == 'denny.tosp@gmail.com' ||
+      email == 'deweei@gmail.com' ||
+      email == 'dewind@gmail.com' ? (
         <TouchableOpacity
           onPress={() => navigation.navigate('Insertprod')}
           activeOpacity={0.8}
           style={styles.btnAdding}>
-          <Feather name="navigation" size={26} color={'#fff'} />
+          <Feather name="plus-square" size={26} color={'#fff'} />
         </TouchableOpacity>
       ) : null}
       {/* <TouchableOpacity

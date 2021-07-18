@@ -62,17 +62,23 @@ const Login = ({navigation}) => {
           navigation.navigate('Onboard');
         })
         .catch(error => {
-          if (error.code === 'auth/email-already-in-use') {
-            ToastAndroid.show(
-              'That email address is already in use!',
-              ToastAndroid.SHORT,
-            );
-          }
-
           if (error.code === 'auth/invalid-email') {
             ToastAndroid.show(
-              'That email address is invalid!',
+              'This email address is invalid!',
               ToastAndroid.SHORT,
+              // console.log('This email address is invalid! '),
+            );
+          } else if (error.code === 'auth/user-not-found') {
+            ToastAndroid.show(
+              'This email address not available!',
+              ToastAndroid.SHORT,
+              // console.log('This email address not available!'),
+            );
+          } else if (error.code === 'auth/wrong-password') {
+            ToastAndroid.show(
+              'This password is incorrect!',
+              ToastAndroid.SHORT,
+              // console.log('This password is incorrect!'),
             );
           }
 
@@ -205,107 +211,107 @@ const Login = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={COLORS.primary}
-        translucent={true}
-      />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={COLORS.primary}
+          translucent={true}
+        />
 
-      <SafeAreaView style={styles.headerWrapper}>
-        <View style={styles.header}>
+        <SafeAreaView style={styles.headerWrapper}>
+          <View style={styles.header}>
+            <View>
+              <TouchableOpacity onPress={() => BackHandler.exitApp()}>
+                <Icon name="chevron-left" size={24} style={styles.iconWhite} />
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Text style={styles.headerText}>Login</Text>
+            </View>
+            <View
+              style={{
+                width: 20,
+              }}
+            />
+          </View>
+          <View style={styles.splash}>
+            <Splash width={80} height={80} />
+          </View>
+        </SafeAreaView>
+        <View style={styles.content}>
           <View>
-            <TouchableOpacity onPress={() => BackHandler.exitApp()}>
-              <Icon name="chevron-left" size={24} style={styles.iconWhite} />
+            <Text style={styles.title}>Personal Information</Text>
+          </View>
+          {/* <Dropdown/> */}
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Your email"
+              placeholderTextColor="#ababab"
+              // keyboardType="numeric"
+              onChangeText={text => setEmail(text)}
+              keyboardAppearance="light"
+              keyboardType="email-address"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Your password"
+              onChangeText={text => setPassword(text)}
+              placeholderTextColor="#ababab"
+              secureTextEntry={true}
+              // keyboardType="numeric"
+              keyboardAppearance="light"
+            />
+          </View>
+          <View>
+            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+              <Text style={styles.description}>
+                If you don't have an account, please register here to use our
+                service
+              </Text>
             </TouchableOpacity>
           </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={styles.headerText}>Login</Text>
-          </View>
-          <View
-            style={{
-              width: 20,
-            }}
-          />
-        </View>
-        <View style={styles.splash}>
-          <Splash width={80} height={80} />
-        </View>
-      </SafeAreaView>
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.title}>Personal Information</Text>
-        </View>
-        {/* <Dropdown/> */}
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Your email"
-            placeholderTextColor="#ababab"
-            // keyboardType="numeric"
-            onChangeText={text => setEmail(text)}
-            keyboardAppearance="light"
-            keyboardType="email-address"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Your password"
-            onChangeText={text => setPassword(text)}
-            placeholderTextColor="#ababab"
-            secureTextEntry={true}
-            // keyboardType="numeric"
-            keyboardAppearance="light"
-          />
-        </View>
-        <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={styles.description}>
-              If you don't have an account, please register here to use our
-              service
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              SignIn(email, password);
-            }}>
-            <Icon name="navigation" size={25} style={styles.iconButton} />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.viewRowSocial}>
-          <View style={styles.viewCardSocial}>
-            <Pressable onPress={() => googleLogin()} style={styles.btnGoogle}>
-              <Image
-                source={require('../../assets/icon/ic_google.png')}
-                resizeMode="contain"
-                style={{height: 22, width: 22}}
-              />
-            </Pressable>
-
-            <Pressable
-              style={styles.btnFacebook}
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity
+              style={styles.button}
               onPress={() => {
-                fbLogin();
+                SignIn(email, password);
               }}>
-              <Image
-                source={require('../../assets/icon/ic_facebook.png')}
-                resizeMode="contain"
-                style={{height: 22, width: 22}}
-              />
-            </Pressable>
+              <Icon name="navigation" size={25} style={styles.iconButton} />
+            </TouchableOpacity>
+          </View>
 
-            <View style={styles.btnTwitter}>
-              <Image
-                source={require('../../assets/icon/ic_twiter.png')}
-                resizeMode="contain"
-                style={{height: 22, width: 22}}
-              />
+          <View style={styles.viewRowSocial}>
+            <View style={styles.viewCardSocial}>
+              <Pressable onPress={() => googleLogin()} style={styles.btnGoogle}>
+                <Image
+                  source={require('../../assets/icon/ic_google.png')}
+                  resizeMode="contain"
+                  style={{height: 22, width: 22}}
+                />
+              </Pressable>
+
+              <Pressable
+                style={styles.btnFacebook}
+                onPress={() => {
+                  fbLogin();
+                }}>
+                <Image
+                  source={require('../../assets/icon/ic_facebook.png')}
+                  resizeMode="contain"
+                  style={{height: 22, width: 22}}
+                />
+              </Pressable>
+
+              <View style={styles.btnTwitter}>
+                <Image
+                  source={require('../../assets/icon/ic_twiter.png')}
+                  resizeMode="contain"
+                  style={{height: 22, width: 22}}
+                />
+              </View>
             </View>
           </View>
         </View>
-      </View>
       </ScrollView>
     </View>
   );

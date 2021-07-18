@@ -71,7 +71,7 @@ const Onboarding = ({navigation}) => {
   };
 
   const handleDone = () => {
-    navigation.navigate('Splash');
+    navigation.navigate('Login');
   };
 
   return (

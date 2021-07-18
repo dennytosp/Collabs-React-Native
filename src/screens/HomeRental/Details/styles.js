@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   backgroundImageContainer: {
     elevation: 20,
     marginHorizontal: 20,
-    marginTop: 20,
+    marginTop: 10,
     alignItems: 'center',
     height: 430,
     // height: 350,

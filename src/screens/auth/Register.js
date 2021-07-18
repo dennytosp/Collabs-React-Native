@@ -54,11 +54,17 @@ const Register = ({navigation}) => {
           })
           .catch(error => {
             if (error.code === 'auth/email-already-in-use') {
-              console.log('That email address is already in use!');
+              ToastAndroid.show(
+                'That email address is already in use!',
+                ToastAndroid.SHORT,
+              );
             }
 
             if (error.code === 'auth/invalid-email') {
-              console.log('That email address is invalid!');
+              ToastAndroid.show(
+                'That email address is invalid!',
+                ToastAndroid.SHORT,
+              );
             }
 
             console.error(error);
@@ -70,80 +76,82 @@ const Register = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={COLORS.primary}
-        translucent={true}
-      />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={COLORS.primary}
+          translucent={true}
+        />
 
-      <SafeAreaView style={styles.headerWrapper}>
-        <View style={styles.header}>
+        <SafeAreaView style={styles.headerWrapper}>
+          <View style={styles.header}>
+            <View>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon name="chevron-left" size={24} style={styles.iconWhite} />
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Text style={styles.headerText}>Register</Text>
+            </View>
+            <View
+              style={{
+                width: 20,
+              }}
+            />
+          </View>
+          <View style={styles.splash}>
+            <Splash width={80} height={80} />
+          </View>
+        </SafeAreaView>
+        <View style={styles.content}>
           <View>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="chevron-left" size={24} style={styles.iconWhite} />
+            <Text style={styles.title}>Personal Information</Text>
+          </View>
+          {/* <Dropdown/> */}
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Your username"
+              placeholderTextColor="#ababab"
+              onChangeText={text => setUsername(text)}
+              // keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Your email"
+              placeholderTextColor="#ababab"
+              // keyboardType="numeric"
+              keyboardType="email-address"
+              keyboardAppearance="light"
+              onChangeText={text => setEmail(text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Your password"
+              placeholderTextColor="#ababab"
+              onChangeText={text => setPassword(text)}
+              secureTextEntry={true}
+              // keyboardType="numeric"
+              keyboardAppearance="light"
+            />
+          </View>
+          <View>
+            <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+              <Text style={styles.description}>
+                If you forgot your password, please click here to retrieve it
+                and use the app{' '}
+              </Text>
             </TouchableOpacity>
           </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={styles.headerText}>Register</Text>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                SignUp(username, email, password, avatar);
+              }}>
+              <Icon name="arrow-right" size={25} style={styles.iconButton} />
+            </TouchableOpacity>
           </View>
-          <View
-            style={{
-              width: 20,
-            }}
-          />
         </View>
-        <View style={styles.splash}>
-          <Splash width={80} height={80} />
-        </View>
-      </SafeAreaView>
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.title}>Personal Information</Text>
-        </View>
-        {/* <Dropdown/> */}
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Your username"
-            placeholderTextColor="#ababab"
-            onChangeText={text => setUsername(text)}
-            // keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Your email"
-            placeholderTextColor="#ababab"
-            // keyboardType="numeric"
-            keyboardType="email-address"
-            keyboardAppearance="light"
-            onChangeText={text => setEmail(text)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Your password"
-            placeholderTextColor="#ababab"
-            onChangeText={text => setPassword(text)}
-            secureTextEntry={true}
-            // keyboardType="numeric"
-            keyboardAppearance="light"
-          />
-        </View>
-        <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
-            <Text style={styles.description}>
-            If you forgot your password, please click here to retrieve it and use the app            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              SignUp(username, email, password, avatar);
-            }}>
-            <Icon name="arrow-right" size={25} style={styles.iconButton} />
-          </TouchableOpacity>
-        </View>
-      </View>
       </ScrollView>
     </View>
   );

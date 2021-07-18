@@ -86,7 +86,7 @@ const Verfile = ({navigation, item}) => {
         translucent={true}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        {email == 'deweei@gmail.com' || email == 'denny.tosp@gmail.com' ? (
+        {email == 'deweei@gmail.com' || email == 'denny.tosp@gmail.com' || email == 'dewind@gmail.com' ? (
           <View style={styles.titleBar}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Icon name="chevron-left" size={24} color="#52575d" />

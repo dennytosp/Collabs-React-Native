@@ -4,7 +4,7 @@ import COLORS from '../../../consts/color';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f7f7f7',
-    marginTop: 20,
+    marginTop: 25,
   },
   headerWrapper: {
     backgroundColor: COLORS.primary,

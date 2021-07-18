@@ -14,7 +14,6 @@ import Icon from 'react-native-vector-icons/Feather';
 import Splash from '../../assets/svg/paypal.svg';
 import COLORS from '../../consts/color';
 import auth from '@react-native-firebase/auth';
-import database from '@react-native-firebase/database';
 import styles from './styles/stylesForgotPassword';
 
 const ForgotPassword = ({navigation}) => {
@@ -27,19 +26,33 @@ const ForgotPassword = ({navigation}) => {
   const Forgot = email => {
     if (email == null) {
       ToastAndroid.show('Please do not leave it blank!', ToastAndroid.SHORT);
+    } else if (!validateEmail(email)) {
+      ToastAndroid.show('Wrong email format!', ToastAndroid.SHORT);
     } else {
-      if (!validateEmail(email)) {
-        ToastAndroid.show('Wrong email format!', ToastAndroid.SHORT);
-      } else {
-        auth()
-          .sendPasswordResetEmail(email)
-          .then(() => console.log('Sending'))
-          .catch(err => console.log(err));
-        ToastAndroid.show(
-          'Hệ thống đã gởi đường dẫn đặt lại mật khẩu, vui lòng kiểm tra email!',
-          ToastAndroid.LONG,
-        );
-      }
+      auth()
+        .sendPasswordResetEmail(email)
+        .then(snapshot => {
+          console.log(snapshot);
+          ToastAndroid.show(
+            'Password reset link has been sent, please check your email!',
+            ToastAndroid.LONG,
+          );
+        })
+        .catch(error => {
+          if (error.code === 'auth/user-not-found') {
+            ToastAndroid.show(
+              'That email address not available!',
+              ToastAndroid.SHORT,
+            );
+          } else if (error.code === 'auth/invalid-email') {
+            ToastAndroid.show(
+              'That email address is invalid!',
+              ToastAndroid.SHORT,
+            );
+          }
+
+          console.error(error);
+        });
     }
   };
 

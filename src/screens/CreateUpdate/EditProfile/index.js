@@ -18,6 +18,7 @@ import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import * as ImagePicker from 'react-native-image-picker';
+import CropPicker from 'react-native-image-crop-picker';
 
 const Profile = ({navigation}) => {
   const [uploading, setUploading] = useState(false);
@@ -85,6 +86,25 @@ const Profile = ({navigation}) => {
         setImageServices(response.uri);
       }
       if (response.didCancel) {
+        setCheck(false);
+      }
+    });
+  };
+
+  const LibraryPicker = () => {
+    const options = {
+      noData: true,
+    };
+    CropPicker.openPicker({
+      width: 600,
+      height: 600,
+      cropping: true,
+    }).then(image => {
+      console.log('Reponse = ', image);
+      if (image) {
+        setCheck(true);
+        setImageServices(image.uri);
+      } else {
         setCheck(false);
       }
     });
@@ -196,98 +216,98 @@ const Profile = ({navigation}) => {
 
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={COLORS.primary}
-        translucent={true}
-      />
+      <View style={styles.container}>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={COLORS.primary}
+          translucent={true}
+        />
 
-      <SafeAreaView style={styles.headerWrapper}>
-        <View style={styles.header}>
-          <View>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="chevron-left" size={24} style={styles.iconWhite} />
-            </TouchableOpacity>
-          </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={styles.headerText}>My Profile</Text>
-          </View>
-          <View
-            style={{
-              width: 20,
-            }}
-          />
-        </View>
-        <View style={styles.splash}>
-          <Pressable onPress={() => ImageLibary()}>
-            <Image
-              source={{
-                uri: check ? imageServices : avatar,
-              }}
+        <SafeAreaView style={styles.headerWrapper}>
+          <View style={styles.header}>
+            <View>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon name="chevron-left" size={24} style={styles.iconWhite} />
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Text style={styles.headerText}>My Profile</Text>
+            </View>
+            <View
               style={{
-                width: 80,
-                height: 80,
-                backgroundColor: '#fff',
-                borderRadius: 100,
+                width: 20,
               }}
             />
-          </Pressable>
-        </View>
-      </SafeAreaView>
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.title}>Personal Information</Text>
-        </View>
-        {/* <Dropdown/> */}
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Your email"
-            value={email}
-            editable={false}
-            onChangeText={text => setEmail(text)}
-            placeholderTextColor="#ababab"
-            keyboardType="email-address"
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Your phone numbers"
-            placeholderTextColor="#ababab"
-            value={phonenumbers}
-            onChangeText={text => setPhonenumbers(text)}
-            keyboardType="numeric"
-            // keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Your username"
-            value={username}
-            onChangeText={text => setUsername(text)}
-            placeholderTextColor="#ababab"
-            keyboardAppearance="light"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Your full name"
-            value={fullname}
-            onChangeText={text => setFullname(text)}
-            placeholderTextColor="#ababab"
-            keyboardAppearance="light"
-          />
-        </View>
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              edit(phonenumbers, username, email, fullname);
-            }}>
-            <Icon name="arrow-right" size={25} style={styles.iconButton} />
-          </TouchableOpacity>
+          </View>
+          <View style={styles.splash}>
+            <Pressable onPress={() => ImageLibary()}>
+              <Image
+                source={{
+                  uri: check ? imageServices : avatar,
+                }}
+                style={{
+                  width: 80,
+                  height: 80,
+                  backgroundColor: '#fff',
+                  borderRadius: 100,
+                }}
+              />
+            </Pressable>
+          </View>
+        </SafeAreaView>
+        <View style={styles.content}>
+          <View>
+            <Text style={styles.title}>Personal Information</Text>
+          </View>
+          {/* <Dropdown/> */}
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Your email"
+              value={email}
+              editable={false}
+              onChangeText={text => setEmail(text)}
+              placeholderTextColor="#ababab"
+              keyboardType="email-address"
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Your phone numbers"
+              placeholderTextColor="#ababab"
+              value={phonenumbers}
+              onChangeText={text => setPhonenumbers(text)}
+              keyboardType="numeric"
+              // keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Your username"
+              value={username}
+              onChangeText={text => setUsername(text)}
+              placeholderTextColor="#ababab"
+              keyboardAppearance="light"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Your full name"
+              value={fullname}
+              onChangeText={text => setFullname(text)}
+              placeholderTextColor="#ababab"
+              keyboardAppearance="light"
+            />
+          </View>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                edit(phonenumbers, username, email, fullname);
+              }}>
+              <Icon name="arrow-right" size={25} style={styles.iconButton} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
     </ScrollView>
   );
 };

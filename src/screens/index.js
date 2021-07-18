@@ -26,7 +26,7 @@ const Stack = createStackNavigator();
 const App = () => {
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   let routeName;
-  
+
   useEffect(() => {
     let isCancelled = false;
     const runAsync = async () => {
@@ -40,7 +40,7 @@ const App = () => {
               setIsFirstLaunch(false);
             }
           });
-              }
+        }
       } catch (e) {
         if (!isCancelled) {
           throw e;
@@ -55,7 +55,6 @@ const App = () => {
     };
   }, []);
 
-
   // useEffect(() => {
   //   AsyncStorage.getItem('Onboardingfirst').then(value => {
   //     if (value == null) {
@@ -67,7 +66,6 @@ const App = () => {
   //   });
   // }, []);
 
-  
   if (isFirstLaunch === null) {
     return null;
   } else if (isFirstLaunch == true) {
